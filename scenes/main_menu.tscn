@@ -1,0 +1,138 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmdqtndi6rkpv"]
+
+[ext_resource type="Texture2D" uid="uid://byal6h856ynn0" path="res://graphics/titlescreen.png" id="1_8yg3x"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_pqmpq"]
+[ext_resource type="FontFile" uid="uid://7dxyuf2yu41a" path="res://fonts/pipanganan.otf" id="2_eofru"]
+[ext_resource type="Theme" uid="uid://crdqpfrvvr1aj" path="res://scenes/themes/title_menu_button.tres" id="3_asjet"]
+
+[node name="MainMenu" type="Node"]
+script = ExtResource("1_pqmpq")
+
+[node name="TitleScreen" type="TextureRect" parent="."]
+modulate = Color(0.691357, 0.691357, 0.691357, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 69.0
+offset_right = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8yg3x")
+expand_mode = 2
+
+[node name="ColorBackground" type="ColorRect" parent="."]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -324.0
+offset_right = 400.0
+offset_bottom = 323.0
+grow_vertical = 2
+color = Color(0.682353, 0.14902, 0.156863, 1)
+metadata/_edit_lock_ = true
+
+[node name="ColorBottomStripes" type="ColorRect" parent="."]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -324.0
+offset_right = 400.0
+offset_bottom = -222.0
+grow_vertical = 2
+color = Color(0.913725, 0.360784, 0.141176, 1)
+metadata/_edit_lock_ = true
+
+[node name="ColorBottomStripes2" type="ColorRect" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -102.0
+offset_right = 400.0
+grow_vertical = 0
+color = Color(0.913725, 0.360784, 0.141176, 1)
+metadata/_edit_lock_ = true
+
+[node name="ColorStripesOrange" type="ColorRect" parent="."]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -214.0
+offset_right = 400.0
+offset_bottom = -204.0
+grow_vertical = 2
+color = Color(0.913725, 0.360784, 0.141176, 1)
+metadata/_edit_lock_ = true
+
+[node name="ColorStripesOrange2" type="ColorRect" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -122.0
+offset_right = 400.0
+offset_bottom = -112.0
+grow_vertical = 0
+color = Color(0.913725, 0.360784, 0.141176, 1)
+metadata/_edit_lock_ = true
+
+[node name="ColorStripesYellow1" type="ColorRect" parent="."]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -194.0
+offset_right = 400.0
+offset_bottom = -184.0
+grow_vertical = 2
+color = Color(0.898039, 0.572549, 0.141176, 1)
+metadata/_edit_lock_ = true
+
+[node name="ColorStripesYellow2" type="ColorRect" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -142.0
+offset_right = 400.0
+offset_bottom = -132.0
+grow_vertical = 0
+color = Color(0.898039, 0.572549, 0.141176, 1)
+metadata/_edit_lock_ = true
+
+[node name="TitleLabel" type="Label" parent="."]
+offset_left = 36.0
+offset_top = 210.0
+offset_right = 362.0
+offset_bottom = 252.0
+theme_override_colors/font_color = Color(0.898039, 0.572549, 0.141176, 1)
+theme_override_colors/font_shadow_color = Color(0.65098, 0.117647, 0.129412, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/font = ExtResource("2_eofru")
+theme_override_font_sizes/font_size = 48
+text = "Sinig... Ang?"
+metadata/_edit_lock_ = true
+
+[node name="MainMenuList" type="VBoxContainer" parent="."]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 60.0
+offset_top = -4.0
+offset_right = 331.0
+offset_bottom = 90.0
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="StartGame" type="Button" parent="MainMenuList"]
+layout_mode = 2
+theme = ExtResource("3_asjet")
+text = "Time to cook!"
+
+[node name="HowToPlay" type="Button" parent="MainMenuList"]
+layout_mode = 2
+theme = ExtResource("3_asjet")
+text = "How to Play!"
+
+[node name="QuitGame" type="Button" parent="MainMenuList"]
+layout_mode = 2
+theme = ExtResource("3_asjet")
+text = "Huwag mo kong iwanan"
