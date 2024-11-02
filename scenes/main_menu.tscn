@@ -101,7 +101,7 @@ offset_left = 36.0
 offset_top = 210.0
 offset_right = 362.0
 offset_bottom = 252.0
-theme_override_colors/font_color = Color(0.898039, 0.572549, 0.141176, 1)
+theme_override_colors/font_color = Color(0.982532, 0.682934, 0.342982, 1)
 theme_override_colors/font_shadow_color = Color(0.65098, 0.117647, 0.129412, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 6
@@ -109,6 +109,19 @@ theme_override_constants/shadow_outline_size = 8
 theme_override_fonts/font = ExtResource("2_eofru")
 theme_override_font_sizes/font_size = 48
 text = "Sinig... Ang?"
+metadata/_edit_lock_ = true
+
+[node name="SubtitleLabel" type="Label" parent="."]
+offset_left = 36.0
+offset_top = 186.0
+offset_right = 362.0
+offset_bottom = 206.0
+theme_override_colors/font_color = Color(0.779291, 0.779291, 0.779291, 1)
+theme_override_fonts/font = ExtResource("2_eofru")
+theme_override_font_sizes/font_size = 12
+text = "ano po yun? Yung..."
+horizontal_alignment = 1
+vertical_alignment = 1
 metadata/_edit_lock_ = true
 
 [node name="MainMenuList" type="VBoxContainer" parent="."]
@@ -136,3 +149,7 @@ text = "How to Play!"
 layout_mode = 2
 theme = ExtResource("3_asjet")
 text = "Huwag mo kong iwanan"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
