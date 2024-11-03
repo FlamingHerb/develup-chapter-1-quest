@@ -15,12 +15,13 @@ func _process(delta: float) -> void:
 
 func _on_start_game_pressed() -> void:
 	get_tree().change_scene_to_packed(game_scene)
+	AudioManager.bgm_stop()
 
 func _on_how_to_play_pressed() -> void:
 	pass # Replace with function body.
 
 func _on_quit_game_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().quit()
 
 #===============================================================================
 # Custom functions

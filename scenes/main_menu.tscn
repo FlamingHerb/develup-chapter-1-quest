@@ -143,7 +143,7 @@ text = "Ambatucook"
 
 [node name="HowToPlay" parent="MainMenuList" instance=ExtResource("5_0ggim")]
 layout_mode = 2
-text = "Paano 'to gawin?"
+text = "Paano to gawin?"
 
 [node name="QuitGame" parent="MainMenuList" instance=ExtResource("5_0ggim")]
 layout_mode = 2

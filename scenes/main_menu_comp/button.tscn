@@ -10,27 +10,17 @@ theme = ExtResource("1_1l4sf")
 text = "asdasdasdasdasd"
 script = ExtResource("2_sbmqy")
 
-[node name="HoverLeft" type="TextureRect" parent="."]
+[node name="HoverLeft" type="Sprite2D" parent="."]
 visible = false
-layout_mode = 0
-offset_left = -30.0
-offset_top = -2.0
-offset_right = -13.0
-offset_bottom = 15.0
+position = Vector2(-20.3507, 6.625)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_tafd6")
-expand_mode = 2
-stretch_mode = 4
 
-[node name="HoverRight" type="TextureRect" parent="."]
+[node name="HoverRight" type="Sprite2D" parent="."]
 visible = false
-layout_mode = 0
-offset_left = 222.0
-offset_top = -2.0
-offset_right = 239.0
-offset_bottom = 15.0
+position = Vector2(219, 7)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_tafd6")
-expand_mode = 2
-stretch_mode = 4
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
