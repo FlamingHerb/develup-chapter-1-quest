@@ -1,27 +1,32 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8ww0a1pvgtar"]
+[gd_scene load_steps=12 format=3 uid="uid://b8ww0a1pvgtar"]
 
 [ext_resource type="Script" path="res://scripts/game_main.gd" id="1_3ull0"]
 [ext_resource type="Texture2D" uid="uid://dtwqh87n4gtbd" path="res://graphics/game_main/background.png" id="2_uem3c"]
 [ext_resource type="Script" path="res://scripts/game_main/camera_2d.gd" id="3_ftt30"]
 [ext_resource type="Shader" path="res://scripts/game_main/godray.gdshader" id="3_ro3qx"]
+[ext_resource type="Texture2D" uid="uid://d2828v3wrdm67" path="res://graphics/game_main/sinigaaaang.png" id="4_4cejj"]
 [ext_resource type="Texture2D" uid="uid://bfsoyhgf0nemq" path="res://graphics/game_main/counter_top.png" id="4_a3qep"]
 [ext_resource type="Texture2D" uid="uid://d01n4yb18q3yq" path="res://icon.svg" id="4_sjphd"]
 [ext_resource type="Texture2D" uid="uid://ckb1mbjv0u5bp" path="res://graphics/game_main/counter_top_top.png" id="5_ehdg0"]
 [ext_resource type="Environment" uid="uid://2b06qi8mpq8e" path="res://graphics/game_main/env.tres" id="5_t62qh"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_goop2"]
+radius = 45.0
+height = 267.376
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rmqom"]
 shader = ExtResource("3_ro3qx")
 shader_parameter/angle = -0.3
 shader_parameter/position = -0.2
 shader_parameter/spread = 0.96
-shader_parameter/cutoff = -0.019
-shader_parameter/falloff = 0.636
+shader_parameter/cutoff = 0.108
+shader_parameter/falloff = 1.0
 shader_parameter/edge_fade = 0.15
-shader_parameter/speed = 2.0
+shader_parameter/speed = 3.0
 shader_parameter/ray1_density = 8.0
 shader_parameter/ray2_density = 30.0
 shader_parameter/ray2_intensity = 0.3
-shader_parameter/color = Color(1, 0.9, 0.65, 0.8)
+shader_parameter/color = Color(0.813376, 0.637326, 2.69532e-06, 0.8)
 shader_parameter/hdr = false
 shader_parameter/seed = 5.0
 
@@ -35,24 +40,42 @@ visibility_layer = 2
 position = Vector2(576, 324)
 scale = Vector2(0.833333, 0.833333)
 texture = ExtResource("2_uem3c")
+metadata/_edit_lock_ = true
 
-[node name="GodRay" type="Sprite2D" parent="Background"]
-material = SubResource("ShaderMaterial_rmqom")
-position = Vector2(-1.19994, -236.4)
-scale = Vector2(14.9812, 9.25494)
-texture = ExtResource("4_sjphd")
-
-[node name="CounterRoof" type="Sprite2D" parent="Background"]
-self_modulate = Color(0.285969, 0.272194, 0.290561, 1)
-position = Vector2(855.6, -640.8)
-scale = Vector2(7.33341, 7.33341)
-texture = ExtResource("5_ehdg0")
-
-[node name="CounterTop" type="Sprite2D" parent="Background"]
+[node name="CounterTop" type="Sprite2D" parent="."]
 self_modulate = Color(0.649384, 0.630633, 0.655646, 1)
-position = Vector2(6.10352e-05, 436.332)
-scale = Vector2(1.63, 1.145)
+position = Vector2(576, 687.61)
+scale = Vector2(1.35833, 0.954167)
 texture = ExtResource("4_a3qep")
+metadata/_edit_lock_ = true
+
+[node name="SinigangPhysicsBody" type="StaticBody2D" parent="."]
+position = Vector2(602, 570)
+metadata/_edit_lock_ = true
+
+[node name="TheSinigang" type="Sprite2D" parent="SinigangPhysicsBody"]
+self_modulate = Color(0.762404, 0.762404, 0.762404, 1)
+scale = Vector2(0.512604, 0.512604)
+texture = ExtResource("4_4cejj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SinigangPhysicsBody"]
+position = Vector2(-11, 10)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_goop2")
+
+[node name="GodRay" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_rmqom")
+position = Vector2(575, 323.5)
+scale = Vector2(12.4844, 6.99219)
+texture = ExtResource("4_sjphd")
+metadata/_edit_lock_ = true
+
+[node name="CounterRoof" type="Sprite2D" parent="."]
+self_modulate = Color(0.285969, 0.272194, 0.290561, 1)
+position = Vector2(1289, -210)
+scale = Vector2(6.11118, 6.11118)
+texture = ExtResource("5_ehdg0")
+metadata/_edit_lock_ = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("5_t62qh")
@@ -67,3 +90,4 @@ limit_bottom = 774
 limit_smoothed = true
 position_smoothing_enabled = true
 script = ExtResource("3_ftt30")
+metadata/_edit_lock_ = true
