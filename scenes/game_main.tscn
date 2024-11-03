@@ -63,6 +63,8 @@ position = Vector2(-11, 10)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_goop2")
 
+[node name="ProjectileGrouping" type="Node2D" parent="."]
+
 [node name="GodRay" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_rmqom")
 position = Vector2(575, 323.5)
