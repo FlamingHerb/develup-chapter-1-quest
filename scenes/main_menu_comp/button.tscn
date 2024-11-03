@@ -12,13 +12,13 @@ script = ExtResource("2_sbmqy")
 
 [node name="HoverLeft" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(-20.3507, 6.625)
+position = Vector2(-20, 6)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_tafd6")
 
 [node name="HoverRight" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(219, 7)
+position = Vector2(219, 6)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_tafd6")
 

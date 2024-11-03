@@ -118,7 +118,7 @@ offset_left = 36.0
 offset_top = 186.0
 offset_right = 362.0
 offset_bottom = 206.0
-theme_override_colors/font_color = Color(0.779291, 0.779291, 0.779291, 1)
+theme_override_colors/font_color = Color(0.646029, 0.646029, 0.646029, 1)
 theme_override_fonts/font = ExtResource("2_eofru")
 theme_override_font_sizes/font_size = 12
 text = "ano po yun? Yung..."
@@ -136,6 +136,7 @@ offset_right = 331.0
 offset_bottom = 90.0
 grow_vertical = 2
 theme_override_constants/separation = 20
+metadata/_edit_lock_ = true
 
 [node name="StartGame" parent="MainMenuList" instance=ExtResource("5_0ggim")]
 layout_mode = 2
