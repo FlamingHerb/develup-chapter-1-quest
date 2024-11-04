@@ -7,7 +7,6 @@
 
 [node name="ItemBase" type="RigidBody2D"]
 script = ExtResource("1_u5cyj")
-time_in_air = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_7x3gb")

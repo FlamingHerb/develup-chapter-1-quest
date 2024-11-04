@@ -30,8 +30,6 @@ func _new_item_spawn():
 	var new_item = preload("res://scenes/game_main/item_base.tscn")
 	var adding_item = new_item.instantiate()
 	
-	adding_item.time_in_air = randf_range(1, 1.2)
-	
 	if randi_range(0, 1):
 		adding_item.position.x = randi_range(-600, -400)
 	else:
