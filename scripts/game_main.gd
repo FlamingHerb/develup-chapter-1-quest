@@ -33,11 +33,11 @@ func _new_item_spawn():
 	adding_item.time_in_air = randf_range(1, 1.2)
 	
 	if randi_range(0, 1):
-		adding_item.position.x = -400
+		adding_item.position.x = randi_range(-600, -400)
 	else:
-		adding_item.position.x = 1500
-		
-	adding_item.position.y = randi_range(-10, 600)
+		adding_item.position.x =  randi_range(1500, 1700)
+	
+	adding_item.position.y = randi_range(-100, 700)
 	
 	projectile_group.add_child(adding_item)
 	

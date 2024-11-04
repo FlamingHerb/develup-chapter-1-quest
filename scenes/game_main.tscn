@@ -83,7 +83,7 @@ environment = ExtResource("5_t62qh")
 
 [node name="GameCamera" type="Camera2D" parent="."]
 position = Vector2(576, 320)
-zoom = Vector2(0.9, 0.9)
+zoom = Vector2(0.4, 0.4)
 limit_left = -224
 limit_top = -126
 limit_right = 1376

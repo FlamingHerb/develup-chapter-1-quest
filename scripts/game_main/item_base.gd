@@ -23,5 +23,8 @@ func _process(delta: float) -> void:
 
 ## We know position (x,y) but not linear velocity.
 func _calculate_linear_velocity() -> void:
+	# First, classify what kind of throw that is valid for this specific item
+	
 	linear_velocity.x = (target_pos.x - position.x) / time_in_air
-	linear_velocity.y = ((target_pos.y - position.y ) - ((980 * (time_in_air ** 2)) / 2)) / (time_in_air)
+	linear_velocity.y = ((target_pos.y - position.y) - ((980 * (time_in_air ** 2)) / 2)) / time_in_air
+	print(linear_velocity)
