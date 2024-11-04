@@ -11,7 +11,8 @@ enum ItemType {ITEM, ENEMY}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_new_item_spawn()
+	#_new_item_spawn()
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -39,3 +40,12 @@ func _new_item_spawn():
 	
 	projectile_group.add_child(adding_item)
 	
+
+
+func _on_ingredient_death_zone_body_entered(body: Node2D) -> void:
+	print("Welp, it fell.")
+	body.queue_free()
+
+func _on_sinigang_physics_body_body_entered(body: Node2D) -> void:
+	print("Negg-diffed")
+	body.queue_free()

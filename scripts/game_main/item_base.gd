@@ -29,7 +29,7 @@ func _calculate_linear_velocity() -> void:
 	if (position.y > 400 && position.y <= 600):
 		time_in_air = randi_range(1.5, 2)
 	if (position.y > 600 && position.y <= 700):
-		time_in_air = randi_range(2, 3)
+		time_in_air = randi_range(1.7, 2.4)
 	
 	linear_velocity.x = (target_pos.x - position.x) / time_in_air
 	linear_velocity.y = ((target_pos.y - position.y) - ((960 * (time_in_air ** 2)) / 2)) / time_in_air

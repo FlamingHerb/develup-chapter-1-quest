@@ -4,12 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://d01n4yb18q3yq" path="res://icon.svg" id="2_mhsqi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7x3gb"]
+radius = 20.0
 
 [node name="ItemBase" type="RigidBody2D"]
 script = ExtResource("1_u5cyj")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_7x3gb")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_mhsqi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7x3gb")

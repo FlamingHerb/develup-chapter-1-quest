@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b8ww0a1pvgtar"]
+[gd_scene load_steps=13 format=3 uid="uid://b8ww0a1pvgtar"]
 
 [ext_resource type="Script" path="res://scripts/game_main.gd" id="1_3ull0"]
 [ext_resource type="Texture2D" uid="uid://dtwqh87n4gtbd" path="res://graphics/game_main/background.png" id="2_uem3c"]
@@ -12,7 +12,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_goop2"]
 radius = 45.0
-height = 267.376
+height = 226.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rmqom"]
 shader = ExtResource("3_ro3qx")
@@ -29,6 +29,9 @@ shader_parameter/ray2_intensity = 0.3
 shader_parameter/color = Color(0.813376, 0.637326, 2.69532e-06, 0.8)
 shader_parameter/hdr = false
 shader_parameter/seed = 5.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_35bjr"]
+size = Vector2(1603, 145)
 
 [node name="GameMain" type="Node2D"]
 script = ExtResource("1_3ull0")
@@ -49,7 +52,7 @@ scale = Vector2(1.35833, 0.954167)
 texture = ExtResource("4_a3qep")
 metadata/_edit_lock_ = true
 
-[node name="SinigangPhysicsBody" type="StaticBody2D" parent="."]
+[node name="SinigangPhysicsBody" type="Area2D" parent="."]
 position = Vector2(602, 570)
 
 [node name="TheSinigang" type="Sprite2D" parent="SinigangPhysicsBody"]
@@ -57,7 +60,7 @@ self_modulate = Color(0.762404, 0.762404, 0.762404, 1)
 scale = Vector2(0.512604, 0.512604)
 texture = ExtResource("4_4cejj")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SinigangPhysicsBody"]
+[node name="TheHolyGrail" type="CollisionShape2D" parent="SinigangPhysicsBody"]
 position = Vector2(-11, 10)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_goop2")
@@ -73,7 +76,7 @@ metadata/_edit_lock_ = true
 
 [node name="CounterRoof" type="Sprite2D" parent="."]
 self_modulate = Color(0.285969, 0.272194, 0.290561, 1)
-position = Vector2(1289, -210)
+position = Vector2(1289, -252)
 scale = Vector2(6.11118, 6.11118)
 texture = ExtResource("5_ehdg0")
 metadata/_edit_lock_ = true
@@ -83,7 +86,7 @@ environment = ExtResource("5_t62qh")
 
 [node name="GameCamera" type="Camera2D" parent="."]
 position = Vector2(576, 320)
-zoom = Vector2(0.4, 0.4)
+zoom = Vector2(0.5, 0.5)
 limit_left = -224
 limit_top = -126
 limit_right = 1376
@@ -92,3 +95,13 @@ limit_smoothed = true
 position_smoothing_enabled = true
 script = ExtResource("3_ftt30")
 metadata/_edit_lock_ = true
+
+[node name="IngredientDeathZone" type="Area2D" parent="."]
+
+[node name="Death" type="CollisionShape2D" parent="IngredientDeathZone"]
+position = Vector2(576.5, 847.5)
+shape = SubResource("RectangleShape2D_35bjr")
+debug_color = Color(0.956871, 0.119971, 0.43239, 0.42)
+
+[connection signal="body_entered" from="SinigangPhysicsBody" to="." method="_on_sinigang_physics_body_body_entered"]
+[connection signal="body_entered" from="IngredientDeathZone" to="." method="_on_ingredient_death_zone_body_entered"]
