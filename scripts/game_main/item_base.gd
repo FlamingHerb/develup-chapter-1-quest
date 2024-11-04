@@ -34,3 +34,8 @@ func _calculate_linear_velocity() -> void:
 	linear_velocity.x = (target_pos.x - position.x) / time_in_air
 	linear_velocity.y = ((target_pos.y - position.y) - ((960 * (time_in_air ** 2)) / 2)) / time_in_air
 	print(linear_velocity)
+
+
+func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		queue_free()

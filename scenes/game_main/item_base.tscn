@@ -1,16 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://id67ys7ay3hg"]
+[gd_scene load_steps=5 format=3 uid="uid://id67ys7ay3hg"]
 
 [ext_resource type="Script" path="res://scripts/game_main/item_base.gd" id="1_u5cyj"]
 [ext_resource type="Texture2D" uid="uid://d01n4yb18q3yq" path="res://icon.svg" id="2_mhsqi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7x3gb"]
-radius = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_if1u6"]
+radius = 67.0671
 
 [node name="ItemBase" type="RigidBody2D"]
 script = ExtResource("1_u5cyj")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="ItemSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_mhsqi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_7x3gb")
+debug_color = Color(0.971267, 0, 0.449118, 0.42)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_if1u6")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
