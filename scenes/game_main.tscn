@@ -51,7 +51,6 @@ metadata/_edit_lock_ = true
 
 [node name="SinigangPhysicsBody" type="StaticBody2D" parent="."]
 position = Vector2(602, 570)
-metadata/_edit_lock_ = true
 
 [node name="TheSinigang" type="Sprite2D" parent="SinigangPhysicsBody"]
 self_modulate = Color(0.762404, 0.762404, 0.762404, 1)
