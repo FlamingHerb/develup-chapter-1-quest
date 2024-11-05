@@ -31,6 +31,7 @@ var ingredient_cut_graphics = {
 
 @onready var item_sprite = $ItemSprite
 @onready var mouse_collision = $Area2D/CollisionShape2D
+@onready var actual_hitbox = $ActualHitbox
 
 @onready var target_pos = Vector2(602, 570)
 
@@ -57,6 +58,7 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 	# Ingredient is indeed cut.
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		is_ingredient_cut = true
+		actual_hitbox.shape.radius = 50
 		_change_ingredient()
 
 #===============================================================================
@@ -67,11 +69,11 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 func _calculate_linear_velocity() -> void:
 	# First, classify what kind of throw that is valid for this specific item
 	if (position.y >= -100 && position.y <= 400):
-		time_in_air = randi_range(1, 1.2)
+		time_in_air = randf_range(1, 1.2)
 	if (position.y > 400 && position.y <= 600):
-		time_in_air = randi_range(1.5, 2)
+		time_in_air = randf_range(1.5, 2)
 	if (position.y > 600 && position.y <= 700):
-		time_in_air = randi_range(1.7, 2.4)
+		time_in_air = randf_range(1.7, 2.4)
 	
 	linear_velocity.x = (target_pos.x - position.x) / time_in_air
 	linear_velocity.y = ((target_pos.y - position.y) - ((960 * (time_in_air ** 2)) / 2)) / time_in_air

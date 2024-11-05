@@ -1,8 +1,15 @@
 extends Node2D
 
+enum ComboEvent {SCORE, FALLEN, SINIDROP}
+
 @onready var projectile_group = $ProjectileGrouping
 @onready var current_time_label = $UIStuff/TimePanel/CurrentTime
 @onready var screen_tint = $ScreenTint
+@onready var animation_player = $AnimationPlayer
+
+@onready var flavor_text = $UIStuff/ComboPanel/FlavorText
+@onready var combo_count_text = $UIStuff/ComboPanel/ComboLabel
+@onready var combo_panel = $UIStuff/ComboPanel
 
 enum StartingPosition {LEFT, RIGHT}
 enum ItemType {ITEM, ENEMY}
@@ -14,6 +21,18 @@ enum ItemType {ITEM, ENEMY}
 const min_per_hour = 60
 const game_to_irl_min = (2 * PI) / 1440
 
+# Changing stuff in the game
+var current_combo_count: int = 0
+var longest_combo_count: int = 0
+var sinigang_drops: int = 0
+var fallen_items: int = 0
+
+
+const up_maroon_color = 	Color8(123, 17, 19, 255)
+const up_green_color = 		Color8(1, 68, 33, 255)
+const up_yellow_color = 	Color8(243, 170, 44, 255)
+const default_panel_color = Color8(53, 53, 53, 255)
+const default_combo_color = Color8(168, 168, 168, 255)
 
 #===============================================================================
 # Engine Signature/Signals functions
@@ -60,6 +79,9 @@ func _new_item_spawn():
 ## If an ingredient falls.
 func _on_ingredient_death_zone_body_entered(body: Node2D) -> void:
 	## TODO: Deduct points
+	fallen_items += 1
+	_change_combo_count(ComboEvent.FALLEN)
+	
 	print("And it all fell wth.")
 	body.queue_free()
 
@@ -67,9 +89,12 @@ func _on_ingredient_death_zone_body_entered(body: Node2D) -> void:
 ## body is item_base.gd
 func _on_sinigang_physics_body_body_entered(body: Node2D) -> void:
 	if body.is_ingredient_cut:
-		## TODO: Add scoring here.
-		pass
+		_change_combo_count(ComboEvent.SCORE)
+		
 	else:
+		sinigang_drops += 1
+		_change_combo_count(ComboEvent.SINIDROP)
+		
 		print("Did not cut it.")
 	
 	body.queue_free()
@@ -91,3 +116,53 @@ func _change_time_label(current_time: float):
 		text_min = str(minutes)
 	
 	current_time_label.text = text_hour + ":" + text_min
+
+func _change_combo_count(combo_type: ComboEvent):
+	match combo_type:
+		ComboEvent.SCORE:
+			if current_combo_count == 0:
+				animation_player.play("show_combo")
+			current_combo_count += 1
+			
+		ComboEvent.FALLEN:
+			if current_combo_count > 0:
+				animation_player.play("hide_combo")
+			current_combo_count = 0
+			
+		ComboEvent.SINIDROP:
+			if current_combo_count > 0:
+				animation_player.play("hide_combo")
+			current_combo_count = 0
+	
+	# Change flavor text		
+	if current_combo_count == 1 or current_combo_count == 0:
+		flavor_text.text = "COMBO"
+	else:
+		flavor_text.text = "COMBOS"
+	
+	# Set style of color box again.
+	var style_box = load("res://scenes/themes/combo_panel.tres")
+	
+		
+	# Change combo panel and text layout
+	if current_combo_count == 0:
+		combo_count_text.add_theme_color_override("font_color", default_combo_color)
+		style_box.set("bg_color", default_panel_color)
+		
+	elif current_combo_count > 0 and current_combo_count <= 50:
+		combo_count_text.add_theme_color_override("font_color", default_combo_color.lerp(up_yellow_color, float(current_combo_count)/30))
+		style_box.set("bg_color", default_panel_color.lerp(up_green_color, float(current_combo_count)/30))
+	
+	elif current_combo_count > 50 and current_combo_count <= 100:
+		#combo_count_text.add_theme_color_override("font_color", up_yellow_color.lerp(up_green_color, float(current_combo_count - 50)/50))
+		style_box.set("bg_color", up_green_color.lerp(up_maroon_color, float(current_combo_count - 50)/50))
+	
+	print(combo_count_text.get_theme_color("font_color"))
+		
+	combo_panel.add_theme_stylebox_override("panel", style_box)
+	
+	# Finally, change count.
+	combo_count_text.text = str(current_combo_count)
+	
+func _on_timer_timeout() -> void:
+	_new_item_spawn()
