@@ -23,14 +23,14 @@ AudioManager="*res://scenes/autoload/audio_manager.tscn"
 [display]
 
 window/stretch/mode="canvas_items"
+window/vsync/vsync_mode=2
 window/snap/snap_2d_vertices_to_pixel=true
 
 [physics]
 
 2d/run_on_separate_thread=true
+common/physics_interpolation=true
 
 [rendering]
 
-anti_aliasing/quality/msaa_2d=3
-2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true

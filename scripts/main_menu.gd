@@ -10,7 +10,7 @@ func _ready() -> void:
 	AudioManager.bgm_play("res://audio/csd2_mainmenu_c.ogg")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func _on_start_game_pressed() -> void:

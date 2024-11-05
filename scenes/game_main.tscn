@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b8ww0a1pvgtar"]
+[gd_scene load_steps=30 format=3 uid="uid://b8ww0a1pvgtar"]
 
 [ext_resource type="Script" path="res://scripts/game_main.gd" id="1_3ull0"]
 [ext_resource type="Texture2D" uid="uid://dtwqh87n4gtbd" path="res://graphics/game_main/background.png" id="2_uem3c"]
@@ -69,21 +69,8 @@ font = ExtResource("12_gm7aq")
 font_size = 52
 font_color = Color(1, 0, 0, 1)
 
-[sub_resource type="Animation" id="Animation_bf6oq"]
-resource_name = "show_combo"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UIStuff/ComboPanel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(0.329877, 1),
-"update": 0,
-"values": [Vector2(-280, 0), Vector2(0, 0)]
-}
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0my7p"]
+content_margin_top = 30.0
 
 [sub_resource type="Animation" id="Animation_v4jiy"]
 length = 0.001
@@ -98,6 +85,34 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-280, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UIStuff/RoundStart:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_2xmc5"]
+resource_name = "begin_animation"
+length = 7.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UIStuff/RoundStart:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 7, 7.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_esw2s"]
@@ -116,9 +131,26 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(-280, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_bf6oq"]
+resource_name = "show_combo"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UIStuff/ComboPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.329877, 1),
+"update": 0,
+"values": [Vector2(-280, 0), Vector2(0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cyq48"]
 _data = {
 "RESET": SubResource("Animation_v4jiy"),
+"begin_animation": SubResource("Animation_2xmc5"),
 "hide_combo": SubResource("Animation_esw2s"),
 "show_combo": SubResource("Animation_bf6oq")
 }
@@ -126,7 +158,7 @@ _data = {
 [node name="GameMain" type="Node2D"]
 script = ExtResource("1_3ull0")
 game_time = 7.0
-game_speed = 5
+game_speed = 10
 time_passes_allowed = false
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -147,6 +179,7 @@ metadata/_edit_lock_ = true
 
 [node name="SinigangPhysicsBody" type="Area2D" parent="."]
 position = Vector2(602, 570)
+input_pickable = false
 
 [node name="TheSinigang" type="Sprite2D" parent="SinigangPhysicsBody"]
 self_modulate = Color(0.762404, 0.762404, 0.762404, 1)
@@ -181,7 +214,6 @@ environment = ExtResource("5_t62qh")
 process_physics_priority = 1
 position = Vector2(576, 320)
 zoom = Vector2(0.75, 0.75)
-process_callback = 0
 limit_left = -224
 limit_top = -126
 limit_right = 1376
@@ -192,6 +224,7 @@ metadata/_edit_lock_ = true
 
 [node name="IngredientDeathZone" type="Area2D" parent="."]
 position = Vector2(0, 3)
+input_pickable = false
 
 [node name="Death" type="CollisionShape2D" parent="IngredientDeathZone"]
 position = Vector2(605, 847.5)
@@ -279,11 +312,38 @@ grow_vertical = 2
 text = "LUNCH TIME"
 label_settings = SubResource("LabelSettings_a06cu")
 
+[node name="RoundStart" type="RichTextLabel" parent="UIStuff"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -404.5
+offset_top = -93.5
+offset_right = 404.5
+offset_bottom = 93.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.00392157, 0.266667, 0.129412, 1)
+theme_override_colors/font_outline_color = Color(0.952941, 0.666667, 0.172549, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/shadow_outline_size = 24
+theme_override_fonts/normal_font = ExtResource("12_gm7aq")
+theme_override_font_sizes/normal_font_size = 192
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0my7p")
+bbcode_enabled = true
+text = "[wave amp=100.0 freq=5.0 connected=1] BEGIN!
+[/wave]"
+scroll_active = false
+
 [node name="Timer" type="Timer" parent="."]
-autostart = true
 
 [node name="StartOfGameTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 9.0
+one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -293,3 +353,4 @@ libraries = {
 [connection signal="body_entered" from="SinigangPhysicsBody" to="." method="_on_sinigang_physics_body_body_entered"]
 [connection signal="body_entered" from="IngredientDeathZone" to="." method="_on_ingredient_death_zone_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="StartOfGameTimer" to="." method="_on_start_of_game_timer_timeout"]

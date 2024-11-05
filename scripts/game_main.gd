@@ -11,6 +11,9 @@ enum ComboEvent {SCORE, FALLEN, SINIDROP}
 @onready var combo_count_text = $UIStuff/ComboPanel/ComboLabel
 @onready var combo_panel = $UIStuff/ComboPanel
 
+@onready var spawn_timer = $Timer
+@onready var start_of_game_timer = $StartOfGameTimer
+
 enum StartingPosition {LEFT, RIGHT}
 enum ItemType {ITEM, ENEMY}
 
@@ -40,9 +43,12 @@ const default_combo_color = Color8(168, 168, 168, 255)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#_new_item_spawn()
-	pass
-
+	animation_player.play("begin_animation")
+	
+	start_of_game_timer.start()
+	
+	screen_tint.change_color(game_time)
+	_change_time_label(game_time)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -55,26 +61,10 @@ func _process(delta: float) -> void:
 		_change_time_label(game_time)
 		screen_tint.change_color(game_time)
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and Input.is_key_pressed(KEY_SPACE):
-		_new_item_spawn()
-
-#===============================================================================
-# Custom functions
-#===============================================================================
-
-func _new_item_spawn():
-	var new_item = load("res://scenes/game_main/item_base.tscn")
-	var adding_item = new_item.instantiate()
-	
-	if randi_range(0, 1):
-		adding_item.position.x = randi_range(-600, -400)
-	else:
-		adding_item.position.x =  randi_range(1500, 1700)
-	
-	adding_item.position.y = randi_range(-100, 700)
-	
-	projectile_group.add_child(adding_item)
+func _input(_event: InputEvent) -> void:
+	#if event is InputEventKey and Input.is_key_pressed(KEY_SPACE):
+		#_new_item_spawn()
+	pass
 
 ## If an ingredient falls.
 func _on_ingredient_death_zone_body_entered(body: Node2D) -> void:
@@ -82,7 +72,7 @@ func _on_ingredient_death_zone_body_entered(body: Node2D) -> void:
 	fallen_items += 1
 	_change_combo_count(ComboEvent.FALLEN)
 	
-	print("And it all fell wth.")
+	#print("And it all fell wth.")
 	body.queue_free()
 
 ## If an ingredient falls into the sinigang.
@@ -95,9 +85,43 @@ func _on_sinigang_physics_body_body_entered(body: Node2D) -> void:
 		sinigang_drops += 1
 		_change_combo_count(ComboEvent.SINIDROP)
 		
-		print("Did not cut it.")
+		#print("Did not cut it.")
 	
 	body.queue_free()
+
+func _on_timer_timeout() -> void:
+	_new_item_spawn()
+
+func _on_start_of_game_timer_timeout() -> void:
+	# Game can now start, time resumes.
+	time_passes_allowed = true
+	
+	# Play BGM woooh.
+	AudioManager.bgm_play("res://audio/csd2_diner_murder_mystery.ogg")
+	
+	# Wait before spawning items.
+	await get_tree().create_timer(2).timeout
+	spawn_timer.start()
+
+
+
+#===============================================================================
+# Custom functions
+#===============================================================================
+
+func _new_item_spawn():
+	var new_item = preload("res://scenes/game_main/item_base.tscn")
+	var adding_item = new_item.instantiate()
+	
+	if randi_range(0, 1):
+		adding_item.position.x = randi_range(-600, -400)
+	else:
+		adding_item.position.x =  randi_range(1500, 1700)
+	
+	adding_item.position.y = randi_range(-100, 700)
+	
+	projectile_group.add_child(adding_item)
+
 
 func _change_time_label(current_time: float):
 	var text_hour: String = ""
@@ -141,7 +165,7 @@ func _change_combo_count(combo_type: ComboEvent):
 		flavor_text.text = "COMBOS"
 	
 	# Set style of color box again.
-	var style_box = load("res://scenes/themes/combo_panel.tres")
+	var style_box = preload("res://scenes/themes/combo_panel.tres")
 	
 		
 	# Change combo panel and text layout
@@ -157,12 +181,10 @@ func _change_combo_count(combo_type: ComboEvent):
 		#combo_count_text.add_theme_color_override("font_color", up_yellow_color.lerp(up_green_color, float(current_combo_count - 50)/50))
 		style_box.set("bg_color", up_green_color.lerp(up_maroon_color, float(current_combo_count - 50)/50))
 	
-	print(combo_count_text.get_theme_color("font_color"))
+	#print(combo_count_text.get_theme_color("font_color"))
 		
 	combo_panel.add_theme_stylebox_override("panel", style_box)
 	
 	# Finally, change count.
 	combo_count_text.text = str(current_combo_count)
 	
-func _on_timer_timeout() -> void:
-	_new_item_spawn()

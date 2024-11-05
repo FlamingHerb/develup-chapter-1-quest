@@ -21,8 +21,7 @@ shape = SubResource("CircleShape2D_7x3gb")
 debug_color = Color(0.971267, 0, 0.449118, 0.42)
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 2
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_if1u6")

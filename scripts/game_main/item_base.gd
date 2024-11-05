@@ -51,10 +51,10 @@ func _ready() -> void:
 	_calculate_linear_velocity()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	# Ingredient is indeed cut.
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		is_ingredient_cut = true
@@ -78,7 +78,7 @@ func _calculate_linear_velocity() -> void:
 	linear_velocity.x = (target_pos.x - position.x) / time_in_air
 	linear_velocity.y = ((target_pos.y - position.y) - ((960 * (time_in_air ** 2)) / 2)) / time_in_air
 	angular_velocity = randi_range(0, 20)
-	print(linear_velocity)
+	#print(linear_velocity)
 
 ## Recalculates velocity if the ingredient is actually cut.
 func _change_ingredient() -> void:
@@ -94,11 +94,14 @@ func _change_ingredient() -> void:
 	# Recalculate to be thrown towards the pot.
 	linear_velocity.x = (602 - position.x) / 0.1
 	linear_velocity.y = (570 - position.y) / 0.1
+	
 	gravity_scale = 0
 	
 	await get_tree().create_timer(0.2).timeout
 	
 	freeze = false
+	
+	angular_velocity = randi_range(0, 20)
 
 func _set_graphics() -> void:
 	ingredient_picked = ingredient.pick_random()
