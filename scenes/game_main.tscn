@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b8ww0a1pvgtar"]
+[gd_scene load_steps=19 format=3 uid="uid://b8ww0a1pvgtar"]
 
 [ext_resource type="Script" path="res://scripts/game_main.gd" id="1_3ull0"]
 [ext_resource type="Texture2D" uid="uid://dtwqh87n4gtbd" path="res://graphics/game_main/background.png" id="2_uem3c"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://d01n4yb18q3yq" path="res://icon.svg" id="4_sjphd"]
 [ext_resource type="Texture2D" uid="uid://ckb1mbjv0u5bp" path="res://graphics/game_main/counter_top_top.png" id="5_ehdg0"]
 [ext_resource type="Environment" uid="uid://2b06qi8mpq8e" path="res://graphics/game_main/env.tres" id="5_t62qh"]
+[ext_resource type="Script" path="res://scripts/screen_tint.gd" id="10_6w0uc"]
+[ext_resource type="Texture2D" uid="uid://stoy8dp481gx" path="res://scripts/daynightcycle-gradient-texture.tres" id="11_5bvha"]
+[ext_resource type="FontFile" uid="uid://7dxyuf2yu41a" path="res://fonts/pipanganan.otf" id="12_gm7aq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_goop2"]
 radius = 45.0
@@ -22,19 +25,33 @@ shader_parameter/spread = 0.96
 shader_parameter/cutoff = 0.108
 shader_parameter/falloff = 1.0
 shader_parameter/edge_fade = 0.15
-shader_parameter/speed = 3.0
+shader_parameter/speed = 4.0
 shader_parameter/ray1_density = 8.0
 shader_parameter/ray2_density = 30.0
 shader_parameter/ray2_intensity = 0.3
-shader_parameter/color = Color(0.813376, 0.637326, 2.69532e-06, 0.8)
+shader_parameter/color = Color(0.813, 0.637, 0, 0.416)
 shader_parameter/hdr = false
 shader_parameter/seed = 5.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_35bjr"]
 size = Vector2(1603, 145)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x5hht"]
+bg_color = Color(0.207843, 0.207843, 0.207843, 1)
+corner_radius_bottom_right = 35
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aa8wr"]
+corner_radius_bottom_left = 35
+
+[sub_resource type="LabelSettings" id="LabelSettings_nhwy5"]
+font = ExtResource("12_gm7aq")
+font_size = 52
+
 [node name="GameMain" type="Node2D"]
 script = ExtResource("1_3ull0")
+game_time = 8.0
+game_speed = 10
+time_passes_allowed = false
 
 [node name="Background" type="Sprite2D" parent="."]
 self_modulate = Color(1.1, 1.1, 1.1, 1)
@@ -66,17 +83,17 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_goop2")
 
 [node name="ProjectileGrouping" type="Node2D" parent="."]
+modulate = Color(0.808998, 0.808998, 0.808998, 1)
 
 [node name="GodRay" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_rmqom")
 position = Vector2(575, 323.5)
 scale = Vector2(12.4844, 6.99219)
 texture = ExtResource("4_sjphd")
-metadata/_edit_lock_ = true
 
 [node name="CounterRoof" type="Sprite2D" parent="."]
 self_modulate = Color(0.285969, 0.272194, 0.290561, 1)
-position = Vector2(1289, -252)
+position = Vector2(1285, -213)
 scale = Vector2(6.11118, 6.11118)
 texture = ExtResource("5_ehdg0")
 metadata/_edit_lock_ = true
@@ -85,8 +102,10 @@ metadata/_edit_lock_ = true
 environment = ExtResource("5_t62qh")
 
 [node name="GameCamera" type="Camera2D" parent="."]
+process_physics_priority = 1
 position = Vector2(576, 320)
-zoom = Vector2(0.85, 0.85)
+zoom = Vector2(0.75, 0.75)
+process_callback = 0
 limit_left = -224
 limit_top = -126
 limit_right = 1376
@@ -96,11 +115,47 @@ script = ExtResource("3_ftt30")
 metadata/_edit_lock_ = true
 
 [node name="IngredientDeathZone" type="Area2D" parent="."]
+position = Vector2(0, 3)
 
 [node name="Death" type="CollisionShape2D" parent="IngredientDeathZone"]
 position = Vector2(576.5, 847.5)
 shape = SubResource("RectangleShape2D_35bjr")
 debug_color = Color(0.956871, 0.119971, 0.43239, 0.42)
+
+[node name="ScreenTint" type="CanvasModulate" parent="."]
+script = ExtResource("10_6w0uc")
+gradient_texture = ExtResource("11_5bvha")
+
+[node name="UIStuff" type="CanvasLayer" parent="."]
+
+[node name="ComboPanel" type="Panel" parent="UIStuff"]
+offset_right = 420.0
+offset_bottom = 96.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_x5hht")
+
+[node name="TimePanel" type="Panel" parent="UIStuff"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_bottom = 64.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_aa8wr")
+
+[node name="CurrentTime" type="Label" parent="UIStuff/TimePanel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 19.0
+offset_top = -38.0
+offset_right = -13.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "08:00"
+label_settings = SubResource("LabelSettings_nhwy5")
 
 [connection signal="body_entered" from="SinigangPhysicsBody" to="." method="_on_sinigang_physics_body_body_entered"]
 [connection signal="body_entered" from="IngredientDeathZone" to="." method="_on_ingredient_death_zone_body_entered"]

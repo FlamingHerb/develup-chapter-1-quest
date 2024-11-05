@@ -3,8 +3,6 @@
 #===============================================================================
 extends Node
 
-signal is_call_finished
-
 @onready var background_music = %BGM
 @onready var background_sound = %BGS
 @onready var sound_effect_queue = $SFX

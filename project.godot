@@ -23,8 +23,13 @@ AudioManager="*res://scenes/autoload/audio_manager.tscn"
 [display]
 
 window/stretch/mode="canvas_items"
+window/snap/snap_2d_vertices_to_pixel=true
+
+[physics]
+
+2d/run_on_separate_thread=true
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true

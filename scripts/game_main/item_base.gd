@@ -43,7 +43,8 @@ var ingredient_cut_graphics = {
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Set target pos randomly
-	target_pos.x = 602 + randi_range(-100,100)
+	target_pos.x = target_pos.x + randi_range(-200,200)
+	target_pos.y = target_pos.y + randi_range(-400,-200)
 	
 	_set_graphics()
 	_calculate_linear_velocity()

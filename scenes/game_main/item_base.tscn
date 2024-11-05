@@ -9,7 +9,6 @@
 radius = 67.0671
 
 [node name="ItemBase" type="RigidBody2D"]
-position = Vector2(142, 75)
 script = ExtResource("1_u5cyj")
 
 [node name="ItemSprite" type="Sprite2D" parent="."]
