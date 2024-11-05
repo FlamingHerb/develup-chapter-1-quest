@@ -39,13 +39,20 @@ func _new_item_spawn():
 	adding_item.position.y = randi_range(-100, 700)
 	
 	projectile_group.add_child(adding_item)
-	
 
-
+## If an ingredient falls.
 func _on_ingredient_death_zone_body_entered(body: Node2D) -> void:
-	print("Welp, it fell.")
+	## TODO: Deduct points
+	print("And it all fell wth.")
 	body.queue_free()
 
+## If an ingredient falls into the sinigang.
+## body is item_base.gd
 func _on_sinigang_physics_body_body_entered(body: Node2D) -> void:
-	print("Negg-diffed")
+	if body.is_ingredient_cut:
+		## TODO: Add scoring here.
+		pass
+	else:
+		print("Did not cut it.")
+	
 	body.queue_free()

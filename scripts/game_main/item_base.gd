@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-const target_pos = Vector2(602, 570)
+
 enum ItemType {ITEM, ENEMY}
 
 var ingredient = [
@@ -19,6 +19,9 @@ var ingredient_graphics = {
 @onready var time_in_air: float 
 @onready var item_sprite = $ItemSprite
 @onready var ingredient_picked: String
+@onready var is_ingredient_cut: bool = false
+
+@onready var target_pos = Vector2(602, 570)
 
 @export var item_type: ItemType
 
@@ -28,6 +31,9 @@ var ingredient_graphics = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Set target pos randomly
+	target_pos.x = 602 + randi_range(-100,100)
+	
 	_set_graphics()
 	_calculate_linear_velocity()
 
