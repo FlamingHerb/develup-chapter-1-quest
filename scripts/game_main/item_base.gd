@@ -1,9 +1,11 @@
 extends RigidBody2D
 
 const target_pos = Vector2(602, 570)
+enum ItemType {ITEM, ENEMY}
+
 
 @onready var time_in_air: float 
-
+@export var item_type: ItemType
 
 #===============================================================================
 # Engine Signature/Signals functions
