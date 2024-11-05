@@ -16,10 +16,21 @@ var ingredient_graphics = {
 	"tomato": preload("res://graphics/game_main/ingredients/tomato.png")
 }
 
+var ingredient_cut_graphics = {
+	"daikon": preload("res://graphics/game_main/ingredients/daikon_cut.png"),
+	"kangkong": preload("res://graphics/game_main/ingredients/kangkong_cut.png"),
+	"meat": preload("res://graphics/game_main/ingredients/meat_cut.png"),
+	"onion": preload("res://graphics/game_main/ingredients/onion_cut.png"),
+	"tamarind": preload("res://graphics/game_main/ingredients/tamarind_cut.png"),
+	"tomato": preload("res://graphics/game_main/ingredients/tomato_cut.png")
+}
+
 @onready var time_in_air: float 
-@onready var item_sprite = $ItemSprite
 @onready var ingredient_picked: String
 @onready var is_ingredient_cut: bool = false
+
+@onready var item_sprite = $ItemSprite
+@onready var mouse_collision = $Area2D/CollisionShape2D
 
 @onready var target_pos = Vector2(602, 570)
 
@@ -42,8 +53,10 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	# Ingredient is indeed cut.
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		queue_free()
+		is_ingredient_cut = true
+		_change_ingredient()
 
 #===============================================================================
 # Custom functions
@@ -63,6 +76,26 @@ func _calculate_linear_velocity() -> void:
 	linear_velocity.y = ((target_pos.y - position.y) - ((960 * (time_in_air ** 2)) / 2)) / time_in_air
 	angular_velocity = randi_range(0, 20)
 	print(linear_velocity)
+
+## Recalculates velocity if the ingredient is actually cut.
+func _change_ingredient() -> void:
+	# Change graphics to being cut.
+	item_sprite.texture = ingredient_cut_graphics[ingredient_picked]
+	
+	# Disable mouse collision/detection.
+	mouse_collision.disabled = true
+	
+	# Freeze to let it change.
+	freeze = true
+	
+	# Recalculate to be thrown towards the pot.
+	linear_velocity.x = (602 - position.x) / 0.1
+	linear_velocity.y = (570 - position.y) / 0.1
+	gravity_scale = 0
+	
+	await get_tree().create_timer(0.2).timeout
+	
+	freeze = false
 
 func _set_graphics() -> void:
 	ingredient_picked = ingredient.pick_random()
