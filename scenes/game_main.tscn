@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b8ww0a1pvgtar"]
+[gd_scene load_steps=25 format=3 uid="uid://b8ww0a1pvgtar"]
 
 [ext_resource type="Script" path="res://scripts/game_main.gd" id="1_3ull0"]
 [ext_resource type="Texture2D" uid="uid://dtwqh87n4gtbd" path="res://graphics/game_main/background.png" id="2_uem3c"]
@@ -40,17 +40,47 @@ size = Vector2(1603, 145)
 bg_color = Color(0.207843, 0.207843, 0.207843, 1)
 corner_radius_bottom_right = 35
 
+[sub_resource type="LabelSettings" id="LabelSettings_nyyn1"]
+font = ExtResource("12_gm7aq")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_4acwb"]
+font = ExtResource("12_gm7aq")
+font_size = 64
+font_color = Color(1, 1, 0, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aa8wr"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 5
+border_width_bottom = 5
 corner_radius_bottom_left = 35
+shadow_color = Color(0.303233, 0.303233, 0.303233, 0.6)
+shadow_size = 5
+shadow_offset = Vector2(-5, 3)
 
 [sub_resource type="LabelSettings" id="LabelSettings_nhwy5"]
 font = ExtResource("12_gm7aq")
 font_size = 52
+font_color = Color(0, 1, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_watp0"]
+colors = PackedColorArray(0, 0, 0, 1, 0.360784, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4tim2"]
+gradient = SubResource("Gradient_watp0")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c3no4"]
+texture = SubResource("GradientTexture1D_4tim2")
+
+[sub_resource type="LabelSettings" id="LabelSettings_a06cu"]
+font = ExtResource("12_gm7aq")
+font_size = 52
+font_color = Color(1, 0, 0, 1)
 
 [node name="GameMain" type="Node2D"]
 script = ExtResource("1_3ull0")
-game_time = 8.0
-game_speed = 10
+game_time = 7.0
+game_speed = 5
 time_passes_allowed = false
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -129,9 +159,30 @@ gradient_texture = ExtResource("11_5bvha")
 [node name="UIStuff" type="CanvasLayer" parent="."]
 
 [node name="ComboPanel" type="Panel" parent="UIStuff"]
-offset_right = 420.0
-offset_bottom = 96.0
+offset_left = -280.0
+offset_bottom = 64.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_x5hht")
+
+[node name="FlavorTextPerfect" type="Label" parent="UIStuff/ComboPanel"]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 7.0
+offset_right = 277.0
+offset_bottom = 66.0
+text = "PERFECT
+COMBOS"
+label_settings = SubResource("LabelSettings_nyyn1")
+vertical_alignment = 1
+
+[node name="ComboLabel" type="Label" parent="UIStuff/ComboPanel"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = -16.0
+offset_right = 113.0
+offset_bottom = 70.0
+text = "400"
+label_settings = SubResource("LabelSettings_4acwb")
+horizontal_alignment = 1
 
 [node name="TimePanel" type="Panel" parent="UIStuff"]
 anchors_preset = 1
@@ -148,14 +199,37 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 19.0
-offset_top = -38.0
-offset_right = -13.0
-offset_bottom = 32.0
+offset_left = 21.0
+offset_top = -41.0
+offset_right = -11.0
+offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "08:00"
 label_settings = SubResource("LabelSettings_nhwy5")
+
+[node name="RushHourPanel" type="Panel" parent="UIStuff"]
+visible = false
+offset_left = 610.0
+offset_right = 970.0
+offset_bottom = 64.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_c3no4")
+
+[node name="Label" type="Label" parent="UIStuff/RushHourPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -17.5
+offset_right = 166.0
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "LUNCH TIME"
+label_settings = SubResource("LabelSettings_a06cu")
 
 [connection signal="body_entered" from="SinigangPhysicsBody" to="." method="_on_sinigang_physics_body_body_entered"]
 [connection signal="body_entered" from="IngredientDeathZone" to="." method="_on_ingredient_death_zone_body_entered"]
