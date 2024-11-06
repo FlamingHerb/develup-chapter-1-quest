@@ -32,6 +32,12 @@ var item_fall_sfx = [
 	"res://audio/sfx/explode-7.wav"
 ]
 
+var item_cut_sfx = [
+	"res://audio/sfx/ingredient_point_1.wav",
+	"res://audio/sfx/ingredient_point_2.wav",
+	"res://audio/sfx/ingredient_point_3.wav"
+]
+
 @onready var time_in_air: float 
 @onready var ingredient_picked: String
 @onready var is_ingredient_cut: bool = false
@@ -67,6 +73,7 @@ func _process(_delta: float) -> void:
 func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	# Ingredient is indeed cut.
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		AudioManager.sfx_play(item_cut_sfx.pick_random())
 		is_ingredient_cut = true
 		actual_hitbox.shape.radius = 50
 		_change_ingredient()

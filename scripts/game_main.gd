@@ -55,6 +55,12 @@ var sinigang_dive_sfx = [
 	"res://audio/sfx/sinigang_dive_3.ogg"
 ]
 
+var ingredient_cut_sfx = [
+	"res://audio/sfx/ingredient_cut_1.ogg",
+	"res://audio/sfx/ingredient_cut_2.ogg",
+	"res://audio/sfx/ingredient_cut_3.ogg"
+]
+
 #===============================================================================
 # Engine Signature/Signals functions
 #===============================================================================
@@ -68,6 +74,7 @@ func _ready() -> void:
 	_change_time_label(game_time)
 	
 	await TransitionLayer.transition_finished
+	AudioManager.sfx_play("res://audio/sfx/time_to_start.mp3")
 	
 	animation_player.play("begin_animation")
 	
@@ -91,9 +98,9 @@ func _process(delta: float) -> void:
 		screen_tint.change_color(game_time)
 
 func _input(_event: InputEvent) -> void:
-	#if event is InputEventKey and Input.is_key_pressed(KEY_SPACE):
-		#_new_item_spawn()
-	pass
+	if Input.is_action_pressed("pause_game"):
+		#AudioManager.sfx_play("res://audio/sfx/pause_game.wav")
+		pass
 
 ## If an ingredient falls.
 func _on_ingredient_death_zone_body_entered(body: Node2D) -> void:
@@ -108,7 +115,10 @@ func _on_ingredient_death_zone_body_entered(body: Node2D) -> void:
 ## If an ingredient falls into the sinigang.
 ## body is item_base.gd
 func _on_sinigang_physics_body_body_entered(body: Node2D) -> void:
+	print(body.item_type)
 	if body.is_ingredient_cut:
+		AudioManager.sfx_play(ingredient_cut_sfx.pick_random())
+		
 		_change_combo_count(ComboEvent.SCORE)
 		ingredient_cut_hit.stop()
 		ingredient_cut_hit.play("default")
@@ -151,7 +161,7 @@ func _new_item_spawn():
 	var adding_item = new_item.instantiate()
 	
 	# 80% item, 20% death
-	if randf_range(0, 1) < 0.9:
+	if randf_range(0, 1) < 0.75:
 		AudioManager.sfx_play(item_throw_sfx.pick_random())
 		adding_item.item_type = ItemType.ITEM
 	else:
