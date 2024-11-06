@@ -11,8 +11,8 @@
 [ext_resource type="Environment" uid="uid://2b06qi8mpq8e" path="res://graphics/game_main/env.tres" id="5_t62qh"]
 [ext_resource type="Script" path="res://scripts/screen_tint.gd" id="10_6w0uc"]
 [ext_resource type="Texture2D" uid="uid://stoy8dp481gx" path="res://scripts/daynightcycle-gradient-texture.tres" id="11_5bvha"]
-[ext_resource type="FontFile" uid="uid://7dxyuf2yu41a" path="res://fonts/pipanganan.otf" id="12_gm7aq"]
 [ext_resource type="StyleBox" uid="uid://c41n44aj7nu4l" path="res://scenes/themes/combo_panel.tres" id="12_ir30y"]
+[ext_resource type="FontFile" uid="uid://2ne5fj81qgw" path="res://fonts/pipanganan_web.ttf" id="13_0thuj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_goop2"]
 radius = 45.0
@@ -38,7 +38,7 @@ shader_parameter/seed = 5.0
 size = Vector2(3068, 145)
 
 [sub_resource type="LabelSettings" id="LabelSettings_nyyn1"]
-font = ExtResource("12_gm7aq")
+font = ExtResource("13_0thuj")
 font_size = 32
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aa8wr"]
@@ -51,7 +51,7 @@ shadow_size = 5
 shadow_offset = Vector2(-5, 3)
 
 [sub_resource type="LabelSettings" id="LabelSettings_nhwy5"]
-font = ExtResource("12_gm7aq")
+font = ExtResource("13_0thuj")
 font_size = 52
 font_color = Color(0, 1, 0, 1)
 
@@ -65,7 +65,7 @@ gradient = SubResource("Gradient_watp0")
 texture = SubResource("GradientTexture1D_4tim2")
 
 [sub_resource type="LabelSettings" id="LabelSettings_a06cu"]
-font = ExtResource("12_gm7aq")
+font = ExtResource("13_0thuj")
 font_size = 52
 font_color = Color(1, 0, 0, 1)
 
@@ -259,7 +259,7 @@ offset_top = -16.0
 offset_right = 113.0
 offset_bottom = 70.0
 theme_override_colors/font_color = Color(0.658824, 0.658824, 0.658824, 1)
-theme_override_fonts/font = ExtResource("12_gm7aq")
+theme_override_fonts/font = ExtResource("13_0thuj")
 theme_override_font_sizes/font_size = 64
 text = "0
 "
@@ -331,7 +331,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 16
 theme_override_constants/shadow_offset_y = 6
 theme_override_constants/shadow_outline_size = 24
-theme_override_fonts/normal_font = ExtResource("12_gm7aq")
+theme_override_fonts/normal_font = ExtResource("13_0thuj")
 theme_override_font_sizes/normal_font_size = 192
 theme_override_styles/normal = SubResource("StyleBoxEmpty_0my7p")
 bbcode_enabled = true
