@@ -4,10 +4,10 @@ signal transition_finished
 @onready var anim_player = $AnimationPlayer
 
 var transition_sfx = [
-	"res://audio/transition_swing_001.mp3",
-	"res://audio/transition_swing_002.mp3",
-	"res://audio/transition_swing_003.mp3",
-	"res://audio/transition_swing_004.mp3"
+	"res://audio/sfx/transition_swing_001.mp3",
+	"res://audio/sfx/transition_swing_002.mp3",
+	"res://audio/sfx/transition_swing_003.mp3",
+	"res://audio/sfx/transition_swing_004.mp3"
 ]
 
 # Called when the node enters the scene tree for the first time.

@@ -25,6 +25,13 @@ var ingredient_cut_graphics = {
 	"tomato": preload("res://graphics/game_main/ingredients/tomato_cut.png")
 }
 
+var item_fall_sfx = [
+	"res://audio/sfx/explode-4.wav",
+	"res://audio/sfx/explode-5.wav",
+	"res://audio/sfx/explode-6.wav",
+	"res://audio/sfx/explode-7.wav"
+]
+
 @onready var time_in_air: float 
 @onready var ingredient_picked: String
 @onready var is_ingredient_cut: bool = false
@@ -127,6 +134,6 @@ func item_fell() -> void:
 	else:
 		item_fell_anim.play("anim_2")
 		
-	
+	AudioManager.sfx_play(item_fall_sfx.pick_random())
 	await item_fell_anim.animation_finished
 	queue_free()

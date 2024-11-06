@@ -32,7 +32,7 @@ var current_combo_count: int = 0
 var longest_combo_count: int = 0
 var sinigang_drops: int = 0
 var fallen_items: int = 0
-
+var rush_time: bool = true
 
 const up_maroon_color = 	Color8(123, 17, 19, 255)
 const up_green_color = 		Color8(1, 68, 33, 255)
@@ -44,9 +44,15 @@ const god_ray_color = Color8(207, 162, 0, 106)
 const god_ray_color_final = Color8(207, 162, 0, 0)
 
 var item_throw_sfx = [
-	"res://audio/item_throw_1.mp3",
-	"res://audio/item_throw_2.mp3",
-	"res://audio/item_throw_3.mp3"
+	"res://audio/sfx/item_throw_1.mp3",
+	"res://audio/sfx/item_throw_2.mp3",
+	"res://audio/sfx/item_throw_3.mp3"
+]
+
+var sinigang_dive_sfx = [
+	"res://audio/sfx/sinigang_dive_1.ogg",
+	"res://audio/sfx/sinigang_dive_2.ogg",
+	"res://audio/sfx/sinigang_dive_3.ogg"
 ]
 
 #===============================================================================
@@ -107,6 +113,8 @@ func _on_sinigang_physics_body_body_entered(body: Node2D) -> void:
 		ingredient_cut_hit.stop()
 		ingredient_cut_hit.play("default")
 	else:
+		AudioManager.sfx_play(sinigang_dive_sfx.pick_random())
+		
 		sinigang_drops += 1
 		_change_combo_count(ComboEvent.SINIDROP)
 		ingredient_not_cut_hit.stop()
@@ -198,6 +206,9 @@ func _change_combo_count(combo_type: ComboEvent):
 				animation_player.play("hide_combo")
 			current_combo_count = 0
 	
+	# Set longest combo.
+	_set_longest_combo()
+	
 	# Change flavor text		
 	if current_combo_count == 1 or current_combo_count == 0:
 		flavor_text.text = "COMBO"
@@ -227,4 +238,7 @@ func _change_combo_count(combo_type: ComboEvent):
 	
 	# Finally, change count.
 	combo_count_text.text = str(current_combo_count)
-	
+
+func _set_longest_combo() -> void:
+	if current_combo_count > longest_combo_count:
+		longest_combo_count = current_combo_count

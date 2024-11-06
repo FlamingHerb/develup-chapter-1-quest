@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/csd2_diner_murder_mystery.ogg-f144740e1a11fe9
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

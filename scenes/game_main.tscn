@@ -340,7 +340,6 @@ game_speed = 10
 time_passes_allowed = false
 
 [node name="Background" type="Sprite2D" parent="."]
-self_modulate = Color(1.1, 1.1, 1.1, 1)
 light_mask = 2
 visibility_layer = 2
 position = Vector2(576, 324)
