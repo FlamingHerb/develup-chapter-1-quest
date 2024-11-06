@@ -33,10 +33,12 @@ const game_to_irl_min = (2 * PI) / 1440
 # Changing stuff in the game
 var current_combo_count: int = 0
 var longest_combo_count: int = 0
+var ingredients_cut: int = 0
 var sinigang_drops: int = 0
 var fallen_items: int = 0
 var punched_ingredients: int = 0
 var punched_bad_items: int = 0
+var strikes: int = 0
 var rush_time: bool = false
 var end_day: bool = false
 
@@ -153,6 +155,7 @@ func _on_sinigang_physics_body_body_entered(body: Node2D) -> void:
 			if body.is_ingredient_cut:
 				AudioManager.sfx_play(ingredient_cut_sfx.pick_random())
 				
+				ingredients_cut += 1
 				_change_combo_count(ComboEvent.SCORE)
 				ingredient_cut_hit.stop()
 				ingredient_cut_hit.play("default")
@@ -171,6 +174,8 @@ func _on_sinigang_physics_body_body_entered(body: Node2D) -> void:
 			ingredient_not_cut_hit.stop()
 			sinigang_death.stop()
 			
+			sinigang_drops += 1
+			strikes += 1
 			ingredient_not_cut_hit.play("default")
 			sinigang_death.play("default")
 			_change_combo_count(ComboEvent.SINIDROP)
@@ -260,8 +265,11 @@ func _item_got_punched(item_type: ItemType):
 	match item_type:
 		ItemType.ITEM:
 			_change_combo_count(ComboEvent.PUNCHED_INGREDIENT)
+			punched_ingredients += 1
+		
 		ItemType.ENEMY:
 			_change_combo_count(ComboEvent.PUNCHED_BAD_ITEM)
+			punched_bad_items += 1
 	
 	await get_tree().create_timer(0.4).timeout
 	
@@ -363,6 +371,8 @@ func _end_the_day() -> void:
 	animation_player.play("day_end")
 	AudioManager.sfx_play("res://audio/day_has_ended.ogg")
 	
+	_send_statistics()
+	
 	await animation_player.animation_finished
 	
 	TransitionLayer.execute_transition()
@@ -372,6 +382,17 @@ func _end_the_day() -> void:
 	get_tree().change_scene_to_packed(preload("res://scenes/end_screen.tscn"))
 	
 	
+func _send_statistics():
+	var new_dictionary: Dictionary = {
+		"longest_combo_count": longest_combo_count,
+		"ingredients_cut": ingredients_cut,
+		"sinigang_drops": sinigang_drops,
+		"fallen_items": fallen_items,
+		"punched_ingredients": punched_ingredients,
+		"punched_bad_items": punched_bad_items,
+		"strikes": strikes
+	}
 	
+	Events.set_statistics(new_dictionary)
 	
 	
