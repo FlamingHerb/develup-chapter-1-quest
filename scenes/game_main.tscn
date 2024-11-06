@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://b8ww0a1pvgtar"]
+[gd_scene load_steps=71 format=3 uid="uid://b8ww0a1pvgtar"]
 
 [ext_resource type="Script" path="res://scripts/game_main.gd" id="1_3ull0"]
 [ext_resource type="Texture2D" uid="uid://dtwqh87n4gtbd" path="res://graphics/game_main/background.png" id="2_uem3c"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://drge1peqy6pbg" path="res://graphics/game_main/animations/ingredient_cut_hit.png" id="5_g0rmb"]
 [ext_resource type="Environment" uid="uid://2b06qi8mpq8e" path="res://graphics/game_main/env.tres" id="5_t62qh"]
 [ext_resource type="Texture2D" uid="uid://bt73551ww7a1l" path="res://graphics/game_main/animations/ingredient_not_cut_hit.png" id="6_6edan"]
+[ext_resource type="Texture2D" uid="uid://b2rjjo3aimcuv" path="res://graphics/game_main/animations/cloud_transform.png" id="7_v6cpr"]
+[ext_resource type="Texture2D" uid="uid://bbsbckhn4budd" path="res://graphics/game_main/animations/welp_that_happened.png" id="8_mgwa3"]
 [ext_resource type="Script" path="res://scripts/screen_tint.gd" id="10_6w0uc"]
 [ext_resource type="Texture2D" uid="uid://stoy8dp481gx" path="res://scripts/daynightcycle-gradient-texture.tres" id="11_5bvha"]
 [ext_resource type="StyleBox" uid="uid://c41n44aj7nu4l" path="res://scenes/themes/combo_panel.tres" id="12_ir30y"]
@@ -195,6 +197,66 @@ animations = [{
 "loop": false,
 "name": &"default",
 "speed": 24.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4f3x"]
+atlas = ExtResource("7_v6cpr")
+region = Rect2(768, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13eor"]
+atlas = ExtResource("8_mgwa3")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2emh"]
+atlas = ExtResource("8_mgwa3")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3eut"]
+atlas = ExtResource("8_mgwa3")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5oaul"]
+atlas = ExtResource("8_mgwa3")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2nb1"]
+atlas = ExtResource("8_mgwa3")
+region = Rect2(0, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tkrdl"]
+atlas = ExtResource("8_mgwa3")
+region = Rect2(192, 384, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ygstj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4f3x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13eor")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2emh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3eut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5oaul")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2nb1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tkrdl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4f3x")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
 }]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rmqom"]
@@ -492,12 +554,28 @@ tracks/5/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_lvhp7"]
+resource_name = "lunch_time_end"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UIStuff/RushHourPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(610, 0), Vector2(610, -64)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cyq48"]
 _data = {
 "RESET": SubResource("Animation_v4jiy"),
 "begin_animation": SubResource("Animation_2xmc5"),
 "hide_combo": SubResource("Animation_esw2s"),
 "lunch_time": SubResource("Animation_murkd"),
+"lunch_time_end": SubResource("Animation_lvhp7"),
 "show_combo": SubResource("Animation_bf6oq")
 }
 
@@ -547,6 +625,11 @@ position = Vector2(-6, -153)
 scale = Vector2(3, 2)
 sprite_frames = SubResource("SpriteFrames_8sqnl")
 frame = 11
+frame_progress = 1.0
+
+[node name="SinigangDeath" type="AnimatedSprite2D" parent="SinigangPhysicsBody"]
+sprite_frames = SubResource("SpriteFrames_ygstj")
+frame = 7
 frame_progress = 1.0
 
 [node name="ProjectileGrouping" type="Node2D" parent="."]

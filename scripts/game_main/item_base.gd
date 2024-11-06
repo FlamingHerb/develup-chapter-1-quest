@@ -25,6 +25,14 @@ var ingredient_cut_graphics = {
 	"tomato": preload("res://graphics/game_main/ingredients/tomato_cut.png")
 }
 
+
+var death_graphics = [
+	preload("res://graphics/game_main/death/bug_kokuzoumushi_kome.png"),
+	preload("res://graphics/game_main/death/cooking_syouyu.png"),
+	preload("res://graphics/game_main/death/fashion_loose_socks.png"),
+	preload("res://graphics/game_main/death/medical_syoudoku_alcohol.png")
+]
+
 var item_fall_sfx = [
 	"res://audio/sfx/explode-4.wav",
 	"res://audio/sfx/explode-5.wav",
@@ -117,7 +125,10 @@ func _change_ingredient() -> void:
 	
 	# Wait for animation to finish before negg diffing again.
 	await item_got_hit_anim.animation_finished
-	item_sprite.texture = ingredient_cut_graphics[ingredient_picked]
+	
+	if item_type == ItemType.ITEM:
+		item_sprite.texture = ingredient_cut_graphics[ingredient_picked]
+	
 	item_got_hit_anim.play("transform_end")
 	
 	await get_tree().create_timer(0.2).timeout
@@ -127,8 +138,13 @@ func _change_ingredient() -> void:
 	angular_velocity = randi_range(0, 20)
 
 func _set_graphics() -> void:
-	ingredient_picked = ingredient.pick_random()
-	item_sprite.texture = ingredient_graphics[ingredient_picked]
+	match item_type:
+		ItemType.ITEM:
+			ingredient_picked = ingredient.pick_random()
+			item_sprite.texture = ingredient_graphics[ingredient_picked]
+		ItemType.ENEMY:
+			item_sprite.texture = death_graphics.pick_random()
+		
 
 func item_fell() -> void:
 	
@@ -144,3 +160,6 @@ func item_fell() -> void:
 	AudioManager.sfx_play(item_fall_sfx.pick_random())
 	await item_fell_anim.animation_finished
 	queue_free()
+
+func _item_got_punched() -> void:
+	pass

@@ -12,6 +12,7 @@ enum ItemType {ITEM, ENEMY}
 
 @onready var ingredient_cut_hit = $SinigangPhysicsBody/IngredientCutHit
 @onready var ingredient_not_cut_hit = $SinigangPhysicsBody/IngredientNotCut
+@onready var sinigang_death = $SinigangPhysicsBody/SinigangDeath
 
 @onready var flavor_text = $UIStuff/ComboPanel/FlavorText
 @onready var combo_count_text = $UIStuff/ComboPanel/ComboLabel
@@ -61,6 +62,17 @@ var ingredient_cut_sfx = [
 	"res://audio/sfx/ingredient_cut_3.ogg"
 ]
 
+var item_warning_sfx = [
+	"res://audio/sfx/item_warning_1.mp3",
+	"res://audio/sfx/item_warning_2.mp3"
+]
+
+var sinigang_death_sfx = [
+	"res://audio/sfx/sinigang_death_1.ogg",
+	"res://audio/sfx/sinigang_death_2.ogg",
+	"res://audio/sfx/sinigang_death_3.ogg"
+]
+
 #===============================================================================
 # Engine Signature/Signals functions
 #===============================================================================
@@ -105,8 +117,9 @@ func _input(_event: InputEvent) -> void:
 ## If an ingredient falls.
 func _on_ingredient_death_zone_body_entered(body: Node2D) -> void:
 	## TODO: Deduct points
-	fallen_items += 1
-	_change_combo_count(ComboEvent.FALLEN)
+	if body.item_type == ItemType.ITEM:
+		fallen_items += 1
+		_change_combo_count(ComboEvent.FALLEN)
 	
 	#print("And it all fell wth.")
 	
@@ -116,21 +129,32 @@ func _on_ingredient_death_zone_body_entered(body: Node2D) -> void:
 ## body is item_base.gd
 func _on_sinigang_physics_body_body_entered(body: Node2D) -> void:
 	print(body.item_type)
-	if body.is_ingredient_cut:
-		AudioManager.sfx_play(ingredient_cut_sfx.pick_random())
+	match body.item_type:
+		ItemType.ITEM:
+			if body.is_ingredient_cut:
+				AudioManager.sfx_play(ingredient_cut_sfx.pick_random())
+				
+				_change_combo_count(ComboEvent.SCORE)
+				ingredient_cut_hit.stop()
+				ingredient_cut_hit.play("default")
+			else:
+				AudioManager.sfx_play(sinigang_dive_sfx.pick_random())
+				
+				sinigang_drops += 1
+				_change_combo_count(ComboEvent.SINIDROP)
+				ingredient_not_cut_hit.stop()
+				ingredient_not_cut_hit.play("default")
 		
-		_change_combo_count(ComboEvent.SCORE)
-		ingredient_cut_hit.stop()
-		ingredient_cut_hit.play("default")
-	else:
-		AudioManager.sfx_play(sinigang_dive_sfx.pick_random())
-		
-		sinigang_drops += 1
-		_change_combo_count(ComboEvent.SINIDROP)
-		ingredient_not_cut_hit.stop()
-		ingredient_not_cut_hit.play("default")
-		
-		#print("Did not cut it.")
+		ItemType.ENEMY:
+			AudioManager.sfx_play(sinigang_death_sfx.pick_random())
+			AudioManager.sfx_play(sinigang_dive_sfx.pick_random())
+			
+			ingredient_not_cut_hit.stop()
+			sinigang_death.stop()
+			
+			ingredient_not_cut_hit.play("default")
+			sinigang_death.play("default")
+			_change_combo_count(ComboEvent.SINIDROP)
 	
 	body.queue_free()
 
@@ -165,7 +189,7 @@ func _new_item_spawn():
 		AudioManager.sfx_play(item_throw_sfx.pick_random())
 		adding_item.item_type = ItemType.ITEM
 	else:
-		AudioManager.sfx_play(item_throw_sfx.pick_random())
+		AudioManager.sfx_play(item_warning_sfx.pick_random())
 		adding_item.item_type = ItemType.ENEMY
 	
 	if randi_range(0, 1):
