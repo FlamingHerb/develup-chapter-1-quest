@@ -26,6 +26,8 @@ enum ItemType {ITEM, ENEMY}
 @export_range(6, 24) var game_time: float = 6
 @export_range(1, 200) var game_speed: int = 20
 @export var time_passes_allowed: bool = true
+@export_range(6, 24) var rush_time_start: float = true
+@export_range(6, 24) var rush_time_end: float = true
 
 const min_per_hour = 60
 const game_to_irl_min = (2 * PI) / 1440
@@ -40,6 +42,7 @@ var punched_ingredients: int = 0
 var punched_bad_items: int = 0
 var strikes: int = 0
 var rush_time: bool = false
+var finish_rush_time: bool = false
 var end_day: bool = false
 
 const up_maroon_color = 	Color8(123, 17, 19, 255)
@@ -99,8 +102,6 @@ func _ready() -> void:
 	
 	start_of_game_timer.start()
 	
-	
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if time_passes_allowed:
@@ -113,19 +114,29 @@ func _process(delta: float) -> void:
 			end_day = true
 			_end_the_day()
 				
-		
 		# God Ray manipulation
 		if game_time < 11.0:
 			god_ray.material.set("shader_parameter/color", god_ray_color.lerp(god_ray_color_final, (game_time-7.00)/4.00))
 		
 		# Rush Hour Check
-		if game_time > 11.0 and rush_time == false:
+		if game_time > rush_time_start and rush_time == false:
 			print("Rush Time Imminent")
 			AudioManager.bgm_fade(7)
 			rush_time = true
 			spawn_timer.stop()
 			
+			#await get_tree().create_timer(7).timeout
+			
+			
+			
 			rush_time_timer.start()
+		
+		# End Rush hour
+		if game_time > rush_time_end and rush_time == true and finish_rush_time == false:
+			finish_rush_time = true
+			
+			_end_rush_time()
+			
 		
 		_change_time_label(game_time)
 		screen_tint.change_color(game_time)
@@ -208,20 +219,10 @@ func _on_start_of_game_timer_timeout() -> void:
 
 ## Rush time begins
 func _on_rush_time_counter_timeout() -> void:
-	AudioManager.bgm_play("res://audio/csd2_hot_butter_biscuits_lunch_time.ogg")
-	animation_player.play("lunch_time")
-	await animation_player.animation_finished
-	rush_time_duration_timer.start()
-	spawn_timer.start()
+	_start_rush_time()
 
 func _on_rush_time_duration_timeout() -> void:
-	AudioManager.bgm_stop()
-	AudioManager.sfx_play("res://audio/csd2_rush_time_fanfare.ogg")
-	animation_player.play("lunch_time_end")
-	
-	await get_tree().create_timer(5.5).timeout
-
-	AudioManager.bgm_play("res://audio/csd2_cheese_block.ogg")
+	_end_rush_time()
 
 #===============================================================================
 # Custom functions
@@ -395,4 +396,18 @@ func _send_statistics():
 	
 	Events.set_statistics(new_dictionary)
 	
+func _start_rush_time():
+	AudioManager.bgm_play("res://audio/csd2_hot_butter_biscuits_lunch_time.ogg")
+	animation_player.play("lunch_time")
+	await animation_player.animation_finished
+	#rush_time_duration_timer.start()
+	spawn_timer.start()
 	
+func _end_rush_time():
+	AudioManager.bgm_stop()
+	AudioManager.sfx_play("res://audio/csd2_rush_time_fanfare.ogg")
+	animation_player.play("lunch_time_end")
+	
+	await get_tree().create_timer(5.5).timeout
+
+	AudioManager.bgm_play("res://audio/csd2_cheese_block.ogg")

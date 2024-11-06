@@ -613,6 +613,8 @@ script = ExtResource("1_3ull0")
 game_time = 10.0
 game_speed = 14
 time_passes_allowed = false
+rush_time_start = 11.0
+rush_time_end = 14.5
 
 [node name="Background" type="Sprite2D" parent="."]
 light_mask = 2
