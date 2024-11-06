@@ -6,6 +6,8 @@ enum ComboEvent {SCORE, FALLEN, SINIDROP}
 @onready var current_time_label = $UIStuff/TimePanel/CurrentTime
 @onready var screen_tint = $ScreenTint
 @onready var animation_player = $AnimationPlayer
+@onready var god_ray = $GodRay
+
 
 @onready var flavor_text = $UIStuff/ComboPanel/FlavorText
 @onready var combo_count_text = $UIStuff/ComboPanel/ComboLabel
@@ -36,6 +38,9 @@ const up_green_color = 		Color8(1, 68, 33, 255)
 const up_yellow_color = 	Color8(243, 170, 44, 255)
 const default_panel_color = Color8(53, 53, 53, 255)
 const default_combo_color = Color8(168, 168, 168, 255)
+
+const god_ray_color = Color8(207, 162, 0, 106)
+const god_ray_color_final = Color8(207, 162, 0, 0)
 
 var item_throw_sfx = [
 	"res://audio/item_throw_1.mp3",
@@ -71,6 +76,10 @@ func _process(delta: float) -> void:
 		if game_time < 16.0:
 			game_time += delta * game_to_irl_min * game_speed
 		
+		# God Ray manipulation
+		if game_time < 11.0:
+			god_ray.material.set("shader_parameter/color", god_ray_color.lerp(god_ray_color_final, (game_time-7.00)/4.00))
+		
 		_change_time_label(game_time)
 		screen_tint.change_color(game_time)
 
@@ -104,6 +113,7 @@ func _on_sinigang_physics_body_body_entered(body: Node2D) -> void:
 
 func _on_timer_timeout() -> void:
 	_new_item_spawn()
+	spawn_timer.wait_time = randf_range(0.75, 1.25)
 
 func _on_start_of_game_timer_timeout() -> void:
 	# Game can now start, time resumes.

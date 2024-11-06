@@ -24,10 +24,10 @@ shader_parameter/angle = -0.3
 shader_parameter/position = -0.2
 shader_parameter/spread = 0.96
 shader_parameter/cutoff = 0.108
-shader_parameter/falloff = 1.0
+shader_parameter/falloff = 0.2
 shader_parameter/edge_fade = 0.15
 shader_parameter/speed = 4.0
-shader_parameter/ray1_density = 8.0
+shader_parameter/ray1_density = 10.0
 shader_parameter/ray2_density = 30.0
 shader_parameter/ray2_intensity = 0.3
 shader_parameter/color = Color(0.813, 0.637, 0, 0.416)
@@ -201,10 +201,9 @@ texture = ExtResource("4_sjphd")
 
 [node name="CounterRoof" type="Sprite2D" parent="."]
 self_modulate = Color(0.285969, 0.272194, 0.290561, 1)
-position = Vector2(1285, -213)
+position = Vector2(1285, -255)
 scale = Vector2(6.11118, 6.11118)
 texture = ExtResource("5_ehdg0")
-metadata/_edit_lock_ = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("5_t62qh")
@@ -214,12 +213,11 @@ process_physics_priority = 1
 position = Vector2(576, 320)
 zoom = Vector2(0.8, 0.8)
 limit_left = -224
-limit_top = -126
+limit_top = -200
 limit_right = 1376
 limit_bottom = 774
 position_smoothing_enabled = true
 script = ExtResource("3_ftt30")
-metadata/_edit_lock_ = true
 
 [node name="IngredientDeathZone" type="Area2D" parent="."]
 position = Vector2(0, 3)
