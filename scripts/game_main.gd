@@ -127,8 +127,6 @@ func _process(delta: float) -> void:
 			
 			#await get_tree().create_timer(7).timeout
 			
-			
-			
 			rush_time_timer.start()
 		
 		# End Rush hour
