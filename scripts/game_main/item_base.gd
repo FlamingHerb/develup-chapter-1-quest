@@ -93,6 +93,9 @@ func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int
 	# Ingredient is indeed cut.
 	if event is InputEventMouseButton and event.pressed:
 		
+		# Remove mask, no more scanning.
+		
+		
 		# If Left-clicked, levitate to pot.
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			AudioManager.sfx_play(item_cut_sfx.pick_random())
@@ -187,6 +190,8 @@ func _item_got_punched() -> void:
 	
 	linear_velocity = Vector2(0,0)
 	gravity_scale = 0
+	
+	await get_tree().create_timer(0.4).timeout
 	
 	anim_player.play("item_explodes")
 	await anim_player.animation_finished

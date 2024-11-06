@@ -20,6 +20,8 @@ enum ItemType {ITEM, ENEMY}
 
 @onready var spawn_timer = $Timer
 @onready var start_of_game_timer = $StartOfGameTimer
+@onready var rush_time_timer = $RushTimeCounter
+@onready var rush_time_duration_timer = $RushTimeDuration
 
 @export_range(6, 24) var game_time: float = 6
 @export_range(1, 200) var game_speed: int = 20
@@ -35,7 +37,8 @@ var sinigang_drops: int = 0
 var fallen_items: int = 0
 var punched_ingredients: int = 0
 var punched_bad_items: int = 0
-var rush_time: bool = true
+var rush_time: bool = false
+var end_day: bool = false
 
 const up_maroon_color = 	Color8(123, 17, 19, 255)
 const up_green_color = 		Color8(1, 68, 33, 255)
@@ -101,12 +104,26 @@ func _process(delta: float) -> void:
 	if time_passes_allowed:
 		if game_time > 24.0:
 			game_time = 0
-		if game_time < 16.0:
+		if game_time < 17.0:
 			game_time += delta * game_to_irl_min * game_speed
+		
+		if game_time >= 16.5 and end_day == false:
+			end_day = true
+			_end_the_day()
+				
 		
 		# God Ray manipulation
 		if game_time < 11.0:
 			god_ray.material.set("shader_parameter/color", god_ray_color.lerp(god_ray_color_final, (game_time-7.00)/4.00))
+		
+		# Rush Hour Check
+		if game_time > 11.0 and rush_time == false:
+			print("Rush Time Imminent")
+			AudioManager.bgm_fade(7)
+			rush_time = true
+			spawn_timer.stop()
+			
+			rush_time_timer.start()
 		
 		_change_time_label(game_time)
 		screen_tint.change_color(game_time)
@@ -162,7 +179,14 @@ func _on_sinigang_physics_body_body_entered(body: Node2D) -> void:
 
 func _on_timer_timeout() -> void:
 	_new_item_spawn()
-	spawn_timer.wait_time = randf_range(0.75, 1.25)
+	
+	# If not rush time
+	if rush_time_duration_timer.is_stopped():
+		spawn_timer.wait_time = randf_range(0.75, 1.25)
+	
+	# Guns blazing
+	else:
+		spawn_timer.wait_time = randf_range(0.5, 0.75)
 
 func _on_start_of_game_timer_timeout() -> void:
 	# Game can now start, time resumes.
@@ -172,11 +196,27 @@ func _on_start_of_game_timer_timeout() -> void:
 	await get_tree().create_timer(2).timeout
 	
 	# Play BGM woooh.
+	
 	AudioManager.bgm_play("res://audio/csd2_diner_murder_mystery.ogg")
 	
 	spawn_timer.start()
 
+## Rush time begins
+func _on_rush_time_counter_timeout() -> void:
+	AudioManager.bgm_play("res://audio/csd2_hot_butter_biscuits_lunch_time.ogg")
+	animation_player.play("lunch_time")
+	await animation_player.animation_finished
+	rush_time_duration_timer.start()
+	spawn_timer.start()
 
+func _on_rush_time_duration_timeout() -> void:
+	AudioManager.bgm_stop()
+	AudioManager.sfx_play("res://audio/csd2_rush_time_fanfare.ogg")
+	animation_player.play("lunch_time_end")
+	
+	await get_tree().create_timer(5.5).timeout
+
+	AudioManager.bgm_play("res://audio/csd2_cheese_block.ogg")
 
 #===============================================================================
 # Custom functions
@@ -209,11 +249,26 @@ func _new_item_spawn():
 	
 func _item_got_punched(item_type: ItemType):
 	print("Item punched is... ", item_type)
+	
+	# Stop everything for this moment.
+	PhysicsServer2D.set_active(false)
+	time_passes_allowed = false
+	modulate = Color(1.4, 1.4, 1.4)
+	AudioManager.bgm_pause(true)
+	
+	
 	match item_type:
 		ItemType.ITEM:
 			_change_combo_count(ComboEvent.PUNCHED_INGREDIENT)
 		ItemType.ENEMY:
 			_change_combo_count(ComboEvent.PUNCHED_BAD_ITEM)
+	
+	await get_tree().create_timer(0.4).timeout
+	
+	PhysicsServer2D.set_active(true)
+	time_passes_allowed = true
+	modulate = Color(1, 1, 1)
+	AudioManager.bgm_pause(false)
 	
 
 func _change_time_label(current_time: float):
@@ -297,3 +352,26 @@ func _change_combo_count(combo_type: ComboEvent):
 func _set_longest_combo() -> void:
 	if current_combo_count > longest_combo_count:
 		longest_combo_count = current_combo_count
+
+func _end_the_day() -> void:
+	AudioManager.bgm_fade(7)
+	
+	await get_tree().create_timer(3).timeout
+	spawn_timer.stop()
+	await get_tree().create_timer(4).timeout
+	
+	animation_player.play("day_end")
+	AudioManager.sfx_play("res://audio/day_has_ended.ogg")
+	
+	await animation_player.animation_finished
+	
+	TransitionLayer.execute_transition()
+	
+	
+	await TransitionLayer.transition_finished
+	get_tree().change_scene_to_packed(preload("res://scenes/end_screen.tscn"))
+	
+	
+	
+	
+	

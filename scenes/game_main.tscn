@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://b8ww0a1pvgtar"]
+[gd_scene load_steps=72 format=3 uid="uid://b8ww0a1pvgtar"]
 
 [ext_resource type="Script" path="res://scripts/game_main.gd" id="1_3ull0"]
 [ext_resource type="Texture2D" uid="uid://dtwqh87n4gtbd" path="res://graphics/game_main/background.png" id="2_uem3c"]
@@ -429,6 +429,18 @@ tracks/7/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("UIStuff/DayEnd:visible_ratio")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_2xmc5"]
 resource_name = "begin_animation"
@@ -548,10 +560,10 @@ tracks/5/path = NodePath("UIStuff/LunchTime:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(0, 0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_lvhp7"]
@@ -569,10 +581,27 @@ tracks/0/keys = {
 "values": [Vector2(610, 0), Vector2(610, -64)]
 }
 
+[sub_resource type="Animation" id="Animation_68g6x"]
+resource_name = "day_end"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UIStuff/DayEnd:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 6, 7),
+"transitions": PackedFloat32Array(1, 0.277392, 0.277392, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0, 0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cyq48"]
 _data = {
 "RESET": SubResource("Animation_v4jiy"),
 "begin_animation": SubResource("Animation_2xmc5"),
+"day_end": SubResource("Animation_68g6x"),
 "hide_combo": SubResource("Animation_esw2s"),
 "lunch_time": SubResource("Animation_murkd"),
 "lunch_time_end": SubResource("Animation_lvhp7"),
@@ -581,8 +610,8 @@ _data = {
 
 [node name="GameMain" type="Node2D"]
 script = ExtResource("1_3ull0")
-game_time = 7.0
-game_speed = 10
+game_time = 10.0
+game_speed = 14
 time_passes_allowed = false
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -778,6 +807,35 @@ scroll_active = false
 visible_characters = 0
 visible_ratio = 0.0
 
+[node name="DayEnd" type="RichTextLabel" parent="UIStuff"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -598.0
+offset_top = -93.5
+offset_right = 598.0
+offset_bottom = 93.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.00392157, 0.266667, 0.129412, 1)
+theme_override_colors/font_outline_color = Color(0.952941, 0.666667, 0.172549, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/shadow_outline_size = 24
+theme_override_fonts/normal_font = ExtResource("13_0thuj")
+theme_override_font_sizes/normal_font_size = 192
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0my7p")
+bbcode_enabled = true
+text = "[wave amp=100.0 freq=5.0 connected=1] UWIAN NA!
+[/wave]"
+scroll_active = false
+visible_characters = 0
+visible_ratio = 0.0
+
 [node name="LunchTime" type="Label" parent="UIStuff"]
 visible = false
 anchors_preset = 8
@@ -812,9 +870,19 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Timer" type="Timer" parent="."]
+process_callback = 0
 
 [node name="StartOfGameTimer" type="Timer" parent="."]
 wait_time = 5.0
+one_shot = true
+
+[node name="RushTimeCounter" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+
+[node name="RushTimeDuration" type="Timer" parent="."]
+process_callback = 0
+wait_time = 58.0
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -826,3 +894,5 @@ libraries = {
 [connection signal="body_entered" from="IngredientDeathZone" to="." method="_on_ingredient_death_zone_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="StartOfGameTimer" to="." method="_on_start_of_game_timer_timeout"]
+[connection signal="timeout" from="RushTimeCounter" to="." method="_on_rush_time_counter_timeout"]
+[connection signal="timeout" from="RushTimeDuration" to="." method="_on_rush_time_duration_timeout"]

@@ -36,11 +36,20 @@ func bgm_play(path: String, volume: float = 0):
 	background_music.volume_db = volume
 	background_music.play()
 
-## Stops BGM, as expected.
-func bgm_stop(fade: float = 0):
+func bgm_pause(value: bool):
+	background_music.stream_paused = value
+
+func bgm_fade(fade: float = 0):
 	var tween = get_tree().create_tween()
 	tween.tween_property(background_music, "volume_db", -80, fade)
 	await tween.finished
+
+## Stops BGM, as expected.
+func bgm_stop(fade: float = 0):
+	if fade > 0:
+		var tween = get_tree().create_tween()
+		tween.tween_property(background_music, "volume_db", -80, fade)
+		await tween.finished
 	
 	background_music.stop()
 	background_music.volume_db = 0
