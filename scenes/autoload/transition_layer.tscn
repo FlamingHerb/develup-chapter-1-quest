@@ -19,7 +19,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_jlpe6"]
 resource_name = "next_scene"
-length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -35,7 +34,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_lhhhq"]
 resource_name = "next_scene_2"
-length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
