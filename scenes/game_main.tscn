@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://b8ww0a1pvgtar"]
+[gd_scene load_steps=57 format=3 uid="uid://b8ww0a1pvgtar"]
 
 [ext_resource type="Script" path="res://scripts/game_main.gd" id="1_3ull0"]
 [ext_resource type="Texture2D" uid="uid://dtwqh87n4gtbd" path="res://graphics/game_main/background.png" id="2_uem3c"]
@@ -149,18 +149,6 @@ region = Rect2(768, 576, 192, 192)
 atlas = ExtResource("6_6edan")
 region = Rect2(0, 768, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dyxh5"]
-atlas = ExtResource("6_6edan")
-region = Rect2(0, 192, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_olwtl"]
-atlas = ExtResource("6_6edan")
-region = Rect2(192, 192, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_db4cf"]
-atlas = ExtResource("6_6edan")
-region = Rect2(384, 192, 192, 192)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_mcw18"]
 atlas = ExtResource("6_6edan")
 region = Rect2(384, 768, 192, 192)
@@ -202,20 +190,11 @@ animations = [{
 "texture": SubResource("AtlasTexture_scs5a")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dyxh5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_olwtl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_db4cf")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_mcw18")
 }],
 "loop": false,
 "name": &"default",
-"speed": 16.0
+"speed": 24.0
 }]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rmqom"]
@@ -400,7 +379,7 @@ frame_progress = 1.0
 position = Vector2(-6, -153)
 scale = Vector2(3, 2)
 sprite_frames = SubResource("SpriteFrames_8sqnl")
-frame = 14
+frame = 11
 frame_progress = 1.0
 
 [node name="ProjectileGrouping" type="Node2D" parent="."]

@@ -28,8 +28,9 @@ var ingredient_cut_graphics = {
 @onready var time_in_air: float 
 @onready var ingredient_picked: String
 @onready var is_ingredient_cut: bool = false
-@onready var item_got_hit_anim = $ItemGotHit
 
+@onready var item_got_hit_anim = $ItemGotHit
+@onready var item_fell_anim = $ItemFell
 
 @onready var item_sprite = $ItemSprite
 @onready var mouse_collision = $Area2D/CollisionShape2D
@@ -114,3 +115,18 @@ func _change_ingredient() -> void:
 func _set_graphics() -> void:
 	ingredient_picked = ingredient.pick_random()
 	item_sprite.texture = ingredient_graphics[ingredient_picked]
+
+func item_fell() -> void:
+	
+	freeze = true
+	rotation = 0
+	item_sprite.texture = null
+	
+	if randi_range(0, 1):
+		item_fell_anim.play("anim_1")
+	else:
+		item_fell_anim.play("anim_2")
+		
+	
+	await item_fell_anim.animation_finished
+	queue_free()

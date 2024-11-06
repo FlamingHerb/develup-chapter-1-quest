@@ -96,7 +96,8 @@ func _on_ingredient_death_zone_body_entered(body: Node2D) -> void:
 	_change_combo_count(ComboEvent.FALLEN)
 	
 	#print("And it all fell wth.")
-	body.queue_free()
+	
+	body.call_deferred("item_fell")
 
 ## If an ingredient falls into the sinigang.
 ## body is item_base.gd
