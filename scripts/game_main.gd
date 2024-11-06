@@ -199,11 +199,14 @@ func _new_item_spawn():
 	
 	adding_item.position.y = randi_range(-100, 700)
 	
+	adding_item.item_punch.connect(_item_got_punched)
+	
 	projectile_group.add_child(adding_item)
 	
 	# Play SFX
 	
-
+func _item_got_punched():
+	print("Item punched")
 
 func _change_time_label(current_time: float):
 	var text_hour: String = ""

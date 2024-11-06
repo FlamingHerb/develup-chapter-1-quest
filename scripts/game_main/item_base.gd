@@ -1,7 +1,8 @@
 extends RigidBody2D
 
-
 enum ItemType {ITEM, ENEMY}
+
+signal item_punch
 
 var ingredient = [
 	"daikon", "kangkong", "meat", "onion", "tamarind", "tomato"
@@ -46,16 +47,26 @@ var item_cut_sfx = [
 	"res://audio/sfx/ingredient_point_3.wav"
 ]
 
+var explosion_sfx = [
+	"res://audio/sfx/explosion_1.ogg",
+	"res://audio/sfx/explosion_2.ogg"
+]
+
+var parry_sfx = "res://audio/sfx/parry.ogg"
+
 @onready var time_in_air: float 
 @onready var ingredient_picked: String
 @onready var is_ingredient_cut: bool = false
 
 @onready var item_got_hit_anim = $ItemGotHit
 @onready var item_fell_anim = $ItemFell
+@onready var item_explode_anim = $ItemExplodes
+@onready var anim_player = $AnimationPlayer
 
 @onready var item_sprite = $ItemSprite
 @onready var mouse_collision = $Area2D/CollisionShape2D
 @onready var actual_hitbox = $ActualHitbox
+
 
 @onready var target_pos = Vector2(602, 570)
 
@@ -80,11 +91,18 @@ func _process(_delta: float) -> void:
 
 func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	# Ingredient is indeed cut.
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		AudioManager.sfx_play(item_cut_sfx.pick_random())
-		is_ingredient_cut = true
-		actual_hitbox.shape.radius = 50
-		_change_ingredient()
+	if event is InputEventMouseButton and event.pressed:
+		
+		# If Left-clicked, levitate to pot.
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			AudioManager.sfx_play(item_cut_sfx.pick_random())
+			is_ingredient_cut = true
+			actual_hitbox.shape.radius = 50
+			_change_ingredient()
+		
+		# If right-clicked, punch it away.
+		if event.button_index == MOUSE_BUTTON_RIGHT:
+			_item_got_punched()
 
 #===============================================================================
 # Custom functions
@@ -162,4 +180,22 @@ func item_fell() -> void:
 	queue_free()
 
 func _item_got_punched() -> void:
-	pass
+	freeze = true
+	item_punch.emit()
+	AudioManager.sfx_play(parry_sfx)
+	mouse_collision.disabled = true
+	
+	linear_velocity = Vector2(0,0)
+	gravity_scale = 0
+	
+	anim_player.play("item_explodes")
+	await anim_player.animation_finished
+	
+	item_sprite.visible = false
+	AudioManager.sfx_play(explosion_sfx.pick_random())
+	item_explode_anim.play("default")
+	await item_explode_anim.animation_finished
+	
+	
+	queue_free()
+	
