@@ -1,7 +1,133 @@
-[gd_scene load_steps=5 format=3 uid="uid://id67ys7ay3hg"]
+[gd_scene load_steps=23 format=3 uid="uid://id67ys7ay3hg"]
 
 [ext_resource type="Script" path="res://scripts/game_main/item_base.gd" id="1_u5cyj"]
 [ext_resource type="Texture2D" uid="uid://d01n4yb18q3yq" path="res://icon.svg" id="2_mhsqi"]
+[ext_resource type="Texture2D" uid="uid://b2rjjo3aimcuv" path="res://graphics/game_main/animations/cloud_transform.png" id="3_1teqq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ovdti"]
+atlas = ExtResource("3_1teqq")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7yhk"]
+atlas = ExtResource("3_1teqq")
+region = Rect2(0, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0yfx3"]
+atlas = ExtResource("3_1teqq")
+region = Rect2(192, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_guq6q"]
+atlas = ExtResource("3_1teqq")
+region = Rect2(384, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3nei"]
+atlas = ExtResource("3_1teqq")
+region = Rect2(576, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3xwt"]
+atlas = ExtResource("3_1teqq")
+region = Rect2(768, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1pjp"]
+atlas = ExtResource("3_1teqq")
+region = Rect2(768, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6wwe"]
+atlas = ExtResource("3_1teqq")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3jxp"]
+atlas = ExtResource("3_1teqq")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxp7o"]
+atlas = ExtResource("3_1teqq")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8agff"]
+atlas = ExtResource("3_1teqq")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xl1l"]
+atlas = ExtResource("3_1teqq")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ah8u8"]
+atlas = ExtResource("3_1teqq")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y414f"]
+atlas = ExtResource("3_1teqq")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s73nl"]
+atlas = ExtResource("3_1teqq")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12f7g"]
+atlas = ExtResource("3_1teqq")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_me3ep"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ovdti")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7yhk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0yfx3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_guq6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3nei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3xwt")
+}],
+"loop": false,
+"name": &"transform_end",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1pjp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6wwe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3jxp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxp7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8agff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xl1l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ah8u8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y414f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s73nl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_12f7g")
+}],
+"loop": false,
+"name": &"transform_start",
+"speed": 60.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7x3gb"]
 resource_local_to_scene = true
@@ -15,6 +141,11 @@ script = ExtResource("1_u5cyj")
 [node name="ItemSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_mhsqi")
+
+[node name="ItemGotHit" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_me3ep")
+animation = &"transform_start"
 
 [node name="ActualHitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_7x3gb")

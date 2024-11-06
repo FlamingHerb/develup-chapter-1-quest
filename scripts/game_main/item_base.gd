@@ -28,6 +28,8 @@ var ingredient_cut_graphics = {
 @onready var time_in_air: float 
 @onready var ingredient_picked: String
 @onready var is_ingredient_cut: bool = false
+@onready var item_got_hit_anim = $ItemGotHit
+
 
 @onready var item_sprite = $ItemSprite
 @onready var mouse_collision = $Area2D/CollisionShape2D
@@ -82,20 +84,26 @@ func _calculate_linear_velocity() -> void:
 
 ## Recalculates velocity if the ingredient is actually cut.
 func _change_ingredient() -> void:
+	# Freeze to let it change.
+	freeze = true
+	
 	# Change graphics to being cut.
-	item_sprite.texture = ingredient_cut_graphics[ingredient_picked]
+	item_got_hit_anim.play("transform_start")
+	
 	
 	# Disable mouse collision/detection.
 	mouse_collision.disabled = true
-	
-	# Freeze to let it change.
-	freeze = true
 	
 	# Recalculate to be thrown towards the pot.
 	linear_velocity.x = (602 - position.x) / 0.1
 	linear_velocity.y = (570 - position.y) / 0.1
 	
 	gravity_scale = 0
+	
+	# Wait for animation to finish before negg diffing again.
+	await item_got_hit_anim.animation_finished
+	item_sprite.texture = ingredient_cut_graphics[ingredient_picked]
+	item_got_hit_anim.play("transform_end")
 	
 	await get_tree().create_timer(0.2).timeout
 	

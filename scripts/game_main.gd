@@ -2,12 +2,16 @@ extends Node2D
 
 enum ComboEvent {SCORE, FALLEN, SINIDROP}
 
+enum ItemType {ITEM, ENEMY}
+
 @onready var projectile_group = $ProjectileGrouping
 @onready var current_time_label = $UIStuff/TimePanel/CurrentTime
 @onready var screen_tint = $ScreenTint
 @onready var animation_player = $AnimationPlayer
 @onready var god_ray = $GodRay
 
+@onready var ingredient_cut_hit = $SinigangPhysicsBody/IngredientCutHit
+@onready var ingredient_not_cut_hit = $SinigangPhysicsBody/IngredientNotCut
 
 @onready var flavor_text = $UIStuff/ComboPanel/FlavorText
 @onready var combo_count_text = $UIStuff/ComboPanel/ComboLabel
@@ -15,9 +19,6 @@ enum ComboEvent {SCORE, FALLEN, SINIDROP}
 
 @onready var spawn_timer = $Timer
 @onready var start_of_game_timer = $StartOfGameTimer
-
-enum StartingPosition {LEFT, RIGHT}
-enum ItemType {ITEM, ENEMY}
 
 @export_range(6, 24) var game_time: float = 6
 @export_range(1, 200) var game_speed: int = 20
@@ -102,10 +103,13 @@ func _on_ingredient_death_zone_body_entered(body: Node2D) -> void:
 func _on_sinigang_physics_body_body_entered(body: Node2D) -> void:
 	if body.is_ingredient_cut:
 		_change_combo_count(ComboEvent.SCORE)
-		
+		ingredient_cut_hit.stop()
+		ingredient_cut_hit.play("default")
 	else:
 		sinigang_drops += 1
 		_change_combo_count(ComboEvent.SINIDROP)
+		ingredient_not_cut_hit.stop()
+		ingredient_not_cut_hit.play("default")
 		
 		#print("Did not cut it.")
 	
@@ -137,6 +141,14 @@ func _new_item_spawn():
 	var new_item = preload("res://scenes/game_main/item_base.tscn")
 	var adding_item = new_item.instantiate()
 	
+	# 80% item, 20% death
+	if randf_range(0, 1) < 0.9:
+		AudioManager.sfx_play(item_throw_sfx.pick_random())
+		adding_item.item_type = ItemType.ITEM
+	else:
+		AudioManager.sfx_play(item_throw_sfx.pick_random())
+		adding_item.item_type = ItemType.ENEMY
+	
 	if randi_range(0, 1):
 		adding_item.position.x = randi_range(-600, -400)
 	else:
@@ -147,7 +159,7 @@ func _new_item_spawn():
 	projectile_group.add_child(adding_item)
 	
 	# Play SFX
-	AudioManager.sfx_play(item_throw_sfx.pick_random())
+	
 
 
 func _change_time_label(current_time: float):
