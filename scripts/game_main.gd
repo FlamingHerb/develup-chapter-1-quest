@@ -43,12 +43,19 @@ const default_combo_color = Color8(168, 168, 168, 255)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# We assume that we come from a transition.
+	TransitionLayer.remove_transition()
+	
+	screen_tint.change_color(game_time)
+	_change_time_label(game_time)
+	
+	await TransitionLayer.transition_finished
+	
 	animation_player.play("begin_animation")
 	
 	start_of_game_timer.start()
 	
-	screen_tint.change_color(game_time)
-	_change_time_label(game_time)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -96,11 +103,12 @@ func _on_start_of_game_timer_timeout() -> void:
 	# Game can now start, time resumes.
 	time_passes_allowed = true
 	
+	# Wait before spawning items.
+	await get_tree().create_timer(2).timeout
+	
 	# Play BGM woooh.
 	AudioManager.bgm_play("res://audio/csd2_diner_murder_mystery.ogg")
 	
-	# Wait before spawning items.
-	await get_tree().create_timer(2).timeout
 	spawn_timer.start()
 
 

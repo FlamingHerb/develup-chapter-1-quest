@@ -14,8 +14,15 @@ func _process(_delta: float) -> void:
 	pass
 
 func _on_start_game_pressed() -> void:
+	AudioManager.bgm_stop(0.5)
+	
+	TransitionLayer.execute_transition()
+	
+	await TransitionLayer.transition_finished
+	
 	get_tree().change_scene_to_packed(game_scene)
-	AudioManager.bgm_stop()
+	
+	
 
 func _on_how_to_play_pressed() -> void:
 	pass # Replace with function body.
