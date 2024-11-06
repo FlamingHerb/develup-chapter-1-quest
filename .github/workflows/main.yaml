@@ -42,6 +42,14 @@ jobs:
               name: windows
               path: build/windows
 
+          - name: Creating Release
+            uses: ncipollo/release-action@v1.14.0
+            with:
+              token: ${{ secrets.GITHUB_TOKEN }}
+              generateReleaseNotes: true
+              tag: ${{ github.ref_name }}
+              artifacts: build/windows/*
+
     export-web:
         name: Web Export
         runs-on: ubuntu-20.04
