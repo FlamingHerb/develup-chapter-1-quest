@@ -14,10 +14,6 @@ var transition_sfx = [
 func _ready() -> void:
 	pass # Replace with function body.
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
-
 func execute_transition() -> void:
 	AudioManager.sfx_play(transition_sfx.pick_random())
 	anim_player.play("next_scene")
