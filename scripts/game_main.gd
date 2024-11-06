@@ -194,13 +194,12 @@ func _on_sinigang_physics_body_body_entered(body: Node2D) -> void:
 func _on_timer_timeout() -> void:
 	_new_item_spawn()
 	
-	# If not rush time
-	if rush_time_duration_timer.is_stopped():
-		spawn_timer.wait_time = randf_range(0.75, 1.25)
-	
-	# Guns blazing
-	else:
+	# If rush time
+	if rush_time == true and finish_rush_time == false:
 		spawn_timer.wait_time = randf_range(0.5, 0.75)
+	# Else normal
+	else:
+		spawn_timer.wait_time = randf_range(0.75, 1.25)
 
 func _on_start_of_game_timer_timeout() -> void:
 	# Game can now start, time resumes.
