@@ -37,6 +37,12 @@ const up_yellow_color = 	Color8(243, 170, 44, 255)
 const default_panel_color = Color8(53, 53, 53, 255)
 const default_combo_color = Color8(168, 168, 168, 255)
 
+var item_throw_sfx = [
+	"res://audio/item_throw_1.mp3",
+	"res://audio/item_throw_2.mp3",
+	"res://audio/item_throw_3.mp3"
+]
+
 #===============================================================================
 # Engine Signature/Signals functions
 #===============================================================================
@@ -129,6 +135,9 @@ func _new_item_spawn():
 	adding_item.position.y = randi_range(-100, 700)
 	
 	projectile_group.add_child(adding_item)
+	
+	# Play SFX
+	AudioManager.sfx_play(item_throw_sfx.pick_random())
 
 
 func _change_time_label(current_time: float):

@@ -2,6 +2,21 @@
 
 [ext_resource type="Script" path="res://scripts/transition_layer.gd" id="1_yqnpf"]
 
+[sub_resource type="Animation" id="Animation_i4nw1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackBar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1152, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_jlpe6"]
 resource_name = "next_scene"
 length = 0.5
@@ -16,21 +31,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(0.25, 1),
 "update": 0,
 "values": [Vector2(1152, 0), Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_i4nw1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BlackBar:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1152, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_lhhhq"]
