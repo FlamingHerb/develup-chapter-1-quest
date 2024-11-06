@@ -2,7 +2,7 @@ extends RigidBody2D
 
 enum ItemType {ITEM, ENEMY}
 
-signal item_punch
+signal item_punch(item_type: ItemType)
 
 var ingredient = [
 	"daikon", "kangkong", "meat", "onion", "tamarind", "tomato"
@@ -181,7 +181,7 @@ func item_fell() -> void:
 
 func _item_got_punched() -> void:
 	freeze = true
-	item_punch.emit()
+	item_punch.emit(item_type)
 	AudioManager.sfx_play(parry_sfx)
 	mouse_collision.disabled = true
 	

@@ -1,6 +1,6 @@
 extends Node2D
 
-enum ComboEvent {SCORE, FALLEN, SINIDROP}
+enum ComboEvent {SCORE, FALLEN, SINIDROP, PUNCHED_INGREDIENT, PUNCHED_BAD_ITEM}
 
 enum ItemType {ITEM, ENEMY}
 
@@ -33,6 +33,8 @@ var current_combo_count: int = 0
 var longest_combo_count: int = 0
 var sinigang_drops: int = 0
 var fallen_items: int = 0
+var punched_ingredients: int = 0
+var punched_bad_items: int = 0
 var rush_time: bool = true
 
 const up_maroon_color = 	Color8(123, 17, 19, 255)
@@ -205,8 +207,14 @@ func _new_item_spawn():
 	
 	# Play SFX
 	
-func _item_got_punched():
-	print("Item punched")
+func _item_got_punched(item_type: ItemType):
+	print("Item punched is... ", item_type)
+	match item_type:
+		ItemType.ITEM:
+			_change_combo_count(ComboEvent.PUNCHED_INGREDIENT)
+		ItemType.ENEMY:
+			_change_combo_count(ComboEvent.PUNCHED_BAD_ITEM)
+	
 
 func _change_time_label(current_time: float):
 	var text_hour: String = ""
@@ -242,6 +250,16 @@ func _change_combo_count(combo_type: ComboEvent):
 			if current_combo_count > 0:
 				animation_player.play("hide_combo")
 			current_combo_count = 0
+			
+		ComboEvent.PUNCHED_INGREDIENT:
+			if current_combo_count > 0:
+				animation_player.play("hide_combo")
+			current_combo_count = 0
+		
+		ComboEvent.PUNCHED_BAD_ITEM:
+			if current_combo_count == 0:
+				animation_player.play("show_combo")
+			current_combo_count += 1
 	
 	# Set longest combo.
 	_set_longest_combo()
