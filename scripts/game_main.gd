@@ -8,6 +8,7 @@ enum ItemType {ITEM, ENEMY}
 @onready var current_time_label = $UIStuff/TimePanel/CurrentTime
 @onready var screen_tint = $ScreenTint
 @onready var animation_player = $AnimationPlayer
+@onready var combo_animation_player = $AnimationPlayer2
 @onready var god_ray = $GodRay
 
 @onready var ingredient_cut_hit = $SinigangPhysicsBody/IngredientCutHit
@@ -312,27 +313,27 @@ func _change_combo_count(combo_type: ComboEvent):
 	match combo_type:
 		ComboEvent.SCORE:
 			if current_combo_count == 0:
-				animation_player.play("show_combo")
+				combo_animation_player.play("weeee/show_combo")
 			current_combo_count += 1
 			
 		ComboEvent.FALLEN:
 			if current_combo_count > 0:
-				animation_player.play("hide_combo")
+				combo_animation_player.play("weeee/hide_combo")
 			current_combo_count = 0
 			
 		ComboEvent.SINIDROP:
 			if current_combo_count > 0:
-				animation_player.play("hide_combo")
+				combo_animation_player.play("weeee/hide_combo")
 			current_combo_count = 0
 			
 		ComboEvent.PUNCHED_INGREDIENT:
 			if current_combo_count > 0:
-				animation_player.play("hide_combo")
+				combo_animation_player.play("weeee/hide_combo")
 			current_combo_count = 0
 		
 		ComboEvent.PUNCHED_BAD_ITEM:
 			if current_combo_count == 0:
-				animation_player.play("show_combo")
+				combo_animation_player.play("weeee/show_combo")
 			current_combo_count += 1
 	
 	# Set longest combo.

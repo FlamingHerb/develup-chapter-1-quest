@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://b8ww0a1pvgtar"]
+[gd_scene load_steps=65 format=3 uid="uid://b8ww0a1pvgtar"]
 
 [ext_resource type="Script" path="res://scripts/game_main.gd" id="1_3ull0"]
 [ext_resource type="Texture2D" uid="uid://dtwqh87n4gtbd" path="res://graphics/game_main/background.png" id="2_uem3c"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://stoy8dp481gx" path="res://scripts/daynightcycle-gradient-texture.tres" id="11_5bvha"]
 [ext_resource type="StyleBox" uid="uid://c41n44aj7nu4l" path="res://scenes/themes/combo_panel.tres" id="12_ir30y"]
 [ext_resource type="FontFile" uid="uid://2ne5fj81qgw" path="res://fonts/pipanganan_web.ttf" id="13_0thuj"]
+[ext_resource type="AnimationLibrary" uid="uid://blb854qbvcyhm" path="res://scenes/combo/weeee.res" id="18_r0g4p"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_goop2"]
 radius = 45.0
@@ -331,283 +332,6 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 20
 shadow_offset = Vector2(0, 15)
 
-[sub_resource type="Animation" id="Animation_v4jiy"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UIStuff/ComboPanel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-280, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("UIStuff/RoundStart:visible_ratio")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("UIStuff/LunchTime:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("UIStuff/LunchTime:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(167.5, 269)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("UIStuff/RushHourPanel:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(610, -64)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("UIStuff/LunchTimeSub:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1135, 356)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("UIStuff/LunchTime:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("UIStuff/LunchTime:modulate")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("UIStuff/DayEnd:visible_ratio")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_2xmc5"]
-resource_name = "begin_animation"
-length = 5.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UIStuff/RoundStart:visible_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 4.5, 5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 1.0, 1.0, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_68g6x"]
-resource_name = "day_end"
-length = 7.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UIStuff/DayEnd:visible_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 6, 7),
-"transitions": PackedFloat32Array(1, 0.277392, 0.277392, 1),
-"update": 0,
-"values": [0.0, 1.0, 1.0, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_esw2s"]
-resource_name = "hide_combo"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UIStuff/ComboPanel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(0.329877, 1),
-"update": 0,
-"values": [Vector2(-1, 0), Vector2(-280, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_murkd"]
-resource_name = "lunch_time"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UIStuff/LunchTime:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.15, 1),
-"update": 0,
-"values": [Vector2(2, 2), Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("UIStuff/LunchTime:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.15, 1),
-"update": 0,
-"values": [Vector2(-243, 269), Vector2(167.5, 269)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("UIStuff/RushHourPanel:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.137302, 1),
-"update": 0,
-"values": [Vector2(610, -64), Vector2(610, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("UIStuff/LunchTimeSub:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.233333, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1135, 356), Vector2(-800, 356)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("UIStuff/LunchTime:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("UIStuff/LunchTime:modulate")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 1, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(0, 0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_lvhp7"]
-resource_name = "lunch_time_end"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UIStuff/RushHourPanel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.25, 1),
-"update": 0,
-"values": [Vector2(610, 0), Vector2(610, -64)]
-}
-
-[sub_resource type="Animation" id="Animation_bf6oq"]
-resource_name = "show_combo"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UIStuff/ComboPanel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(0.329877, 1),
-"update": 0,
-"values": [Vector2(-280, 0), Vector2(-1, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_cyq48"]
-_data = {
-"RESET": SubResource("Animation_v4jiy"),
-"begin_animation": SubResource("Animation_2xmc5"),
-"day_end": SubResource("Animation_68g6x"),
-"hide_combo": SubResource("Animation_esw2s"),
-"lunch_time": SubResource("Animation_murkd"),
-"lunch_time_end": SubResource("Animation_lvhp7"),
-"show_combo": SubResource("Animation_bf6oq")
-}
-
 [node name="GameMain" type="Node2D"]
 script = ExtResource("1_3ull0")
 game_time = 10.0
@@ -894,7 +618,12 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_cyq48")
+"": ExtResource("18_r0g4p")
+}
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"weeee": ExtResource("18_r0g4p")
 }
 
 [connection signal="body_entered" from="SinigangPhysicsBody" to="." method="_on_sinigang_physics_body_body_entered"]
