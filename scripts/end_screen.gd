@@ -23,9 +23,13 @@ var defeat_sfx = [
 @onready var results_background = $ResultsScreen/ResultsBackground
 
 var drum_roll_sfx = "res://audio/sfx/drum_roll.wav"
+var woosh_sfx = "res://audio/sfx/dsbarexp.wav"
+var mistaker_sfx = "res://audio/sfx/dsplpain.wav"
 var mistake_done_sfx = "res://audio/sfx/end_screen_fucked_up.mp3"
 var good_applause = "res://audio/sfx/good_applause.ogg"
 var bad_applause = "res://audio/sfx/bad_applause.ogg"
+
+var transition_each_line = 0.5
 
 # Arranged in order
 var background_screens = [
@@ -138,6 +142,10 @@ func _results_screen_time() -> void:
 	# Show canvas
 	results_screen_canvas.visible = true
 	
+	# Wait for transition to end first.
+	AudioManager.sfx_play(drum_roll_sfx)
+	await get_tree().create_timer(1).timeout
+	
 	# Setting up man face
 	man_face_results.frame = score
 
@@ -145,159 +153,127 @@ func _results_screen_time() -> void:
 	# Longest Combo
 	#========================================
 	long_combo.visible = true
-	AudioManager.sfx_play(drum_roll_sfx)
-	await get_tree().create_timer(3).timeout
-	AudioManager.sfx_stop_all()
 	
 	long_combo_count.text = str(statistics["longest_combo_count"])
 	long_combo_count.visible = true
-	if statistics["longest_combo_count"] > 75:
-		AudioManager.sfx_play(good_applause)
+	if statistics["longest_combo_count"] >= 75:
+		AudioManager.sfx_play(woosh_sfx)
 		score += 1
 	else:
-		AudioManager.sfx_play(bad_applause)
+		AudioManager.sfx_play(mistaker_sfx)
 	
 	man_face_results.frame = score
 	results_background.texture = background_screens[score]
 	
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(transition_each_line).timeout
 	
 	#========================================
 	# Ingredients Cut
 	#========================================
 	ingredients_cut.visible = true
-	AudioManager.sfx_play(drum_roll_sfx)
-	await get_tree().create_timer(3).timeout
-	AudioManager.sfx_stop_all()
 	
 	ingredients_cut_count.text = str(statistics["ingredients_cut"])
 	ingredients_cut_count.visible = true
 	if statistics["ingredients_cut"] > 50:
-		AudioManager.sfx_play(good_applause)
+		AudioManager.sfx_play(woosh_sfx)
 	else:
-		AudioManager.sfx_play(bad_applause)
+		AudioManager.sfx_play(mistaker_sfx)
 	
 	man_face_results.frame = score
 	results_background.texture = background_screens[score]
 	
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(transition_each_line).timeout
 	
 	#========================================
 	# Punched Bad Items
 	#========================================
 	punched_bad.visible = true
-	AudioManager.sfx_play(drum_roll_sfx)
-	await get_tree().create_timer(3).timeout
-	AudioManager.sfx_stop_all()
 	
 	punched_bad_count.text = str(statistics["punched_bad_items"])
 	punched_bad_count.visible = true
 	if statistics["punched_bad_items"] > 25:
-		AudioManager.sfx_play(good_applause)
+		AudioManager.sfx_play(woosh_sfx)
 	else:
-		AudioManager.sfx_play(bad_applause)
+		AudioManager.sfx_play(mistaker_sfx)
 	
 	man_face_results.frame = score
 	results_background.texture = background_screens[score]
 	
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(transition_each_line).timeout
 	
 	#========================================
 	# Sinigang Drops
 	#========================================
 	sinigang_drop.visible = true
-	AudioManager.sfx_play(drum_roll_sfx)
-	await get_tree().create_timer(3).timeout
-	AudioManager.sfx_stop_all()
 	
 	sinigang_drop_count.text = str(statistics["sinigang_drops"])
 	sinigang_drop_count.visible = true
 	if statistics["sinigang_drops"] == 0:
-		AudioManager.sfx_play(good_applause)
+		AudioManager.sfx_play(woosh_sfx)
 		score += 1
 	else:
 		score -= 1
-		AudioManager.sfx_play(mistake_done_sfx)
+		AudioManager.sfx_play(mistaker_sfx)
 	
 	man_face_results.frame = score
 	results_background.texture = background_screens[score]
 	
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(transition_each_line).timeout
 	
 	#========================================
 	# Fallen Items
 	#========================================
 	fallen_items.visible = true
-	AudioManager.sfx_play(drum_roll_sfx)
-	await get_tree().create_timer(3).timeout
-	AudioManager.sfx_stop_all()
 	
 	fallen_items_count.text = str(statistics["fallen_items"])
 	fallen_items_count.visible = true
 	if statistics["fallen_items"] == 0:
-		AudioManager.sfx_play(good_applause)
+		AudioManager.sfx_play(woosh_sfx)
 		score += 1
 	else:
 		score -= 1
-		AudioManager.sfx_play(mistake_done_sfx)
+		AudioManager.sfx_play(mistaker_sfx)
 	
 	man_face_results.frame = score
 	results_background.texture = background_screens[score]
 	
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(transition_each_line).timeout
 	
 	#========================================
 	# Punched Ingredients
 	#========================================
 	punched_ingredients.visible = true
-	AudioManager.sfx_play(drum_roll_sfx)
-	await get_tree().create_timer(3).timeout
-	AudioManager.sfx_stop_all()
 	
 	punched_ingredients_count.text = str(statistics["punched_ingredients"])
 	punched_ingredients_count.visible = true
 	if statistics["punched_ingredients"] == 0:
-		AudioManager.sfx_play(good_applause)
+		AudioManager.sfx_play(woosh_sfx)
 		score += 1
 	else:
 		score -= 1
-		AudioManager.sfx_play(mistake_done_sfx)
+		AudioManager.sfx_play(mistaker_sfx)
 	
 	man_face_results.frame = score
 	results_background.texture = background_screens[score]
 	
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(transition_each_line).timeout
 	
 	#========================================
 	# Strikes
 	#========================================
 	strikeds.visible = true
-	AudioManager.sfx_play(drum_roll_sfx)
-	await get_tree().create_timer(3).timeout
-	AudioManager.sfx_stop_all()
 	
 	strikeds_count.text = str(statistics["strikes"])
 	strikeds_count.visible = true
 	if statistics["strikes"] == 0:
-		AudioManager.sfx_play(good_applause)
+		AudioManager.sfx_play(woosh_sfx)
 		score += 1
 	else:
 		score -= 1
-		AudioManager.sfx_play(mistake_done_sfx)
+		AudioManager.sfx_play(mistaker_sfx)
 	
 	man_face_results.frame = score
 	results_background.texture = background_screens[score]
 	
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(transition_each_line).timeout
 	
-	
-func _change_results_background(score: int):
-	man_face_results.frame = score
-	results_background.texture = background_screens[score]
-	
-	await get_tree().create_timer(2).timeout
-
-func _wait_for_drumroll():
-	AudioManager.sfx_play(drum_roll_sfx)
-	await get_tree().create_timer(3).timeout
-	AudioManager.sfx_stop_all()

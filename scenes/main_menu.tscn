@@ -396,6 +396,11 @@ layout_mode = 2
 text = "ZapSplat"
 label_settings = ExtResource("6_nptu6")
 
+[node name="SFX5" type="Label" parent="CreditsPanel/GridContainer/VBoxContainer"]
+layout_mode = 2
+text = "Doom (1993)"
+label_settings = ExtResource("6_nptu6")
+
 [node name="SFX3" type="Label" parent="CreditsPanel/GridContainer/VBoxContainer"]
 layout_mode = 2
 text = "Pixabay"
