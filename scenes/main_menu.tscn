@@ -531,7 +531,7 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="Label1" type="RichTextLabel" parent="HowToPlayPanel/VBoxContainer/HBoxContainer2/VBoxContainer"]
-custom_minimum_size = Vector2(213, 0)
+custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("4_c7in5")
@@ -554,7 +554,7 @@ stretch_mode = 5
 flip_h = true
 
 [node name="Label1" type="RichTextLabel" parent="HowToPlayPanel/VBoxContainer/HBoxContainer2/VBoxContainer2"]
-custom_minimum_size = Vector2(163, 0)
+custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("4_c7in5")
 theme_override_font_sizes/normal_font_size = 20
