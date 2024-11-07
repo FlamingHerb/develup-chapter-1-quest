@@ -1,26 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://dmdqtndi6rkpv"]
+[gd_scene load_steps=19 format=3 uid="uid://dmdqtndi6rkpv"]
 
 [ext_resource type="Texture2D" uid="uid://byal6h856ynn0" path="res://graphics/titlescreen.png" id="1_8yg3x"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_pqmpq"]
 [ext_resource type="PackedScene" uid="uid://b8ww0a1pvgtar" path="res://scenes/game_main.tscn" id="2_tokvt"]
 [ext_resource type="FontFile" uid="uid://2ne5fj81qgw" path="res://fonts/pipanganan_web.ttf" id="4_c7in5"]
 [ext_resource type="PackedScene" uid="uid://68su2xs0crgu" path="res://scenes/main_menu_comp/button.tscn" id="5_0ggim"]
+[ext_resource type="StyleBox" uid="uid://dcuon62qhycsh" path="res://scenes/themes/main_menu_panels.tres" id="6_88tif"]
 [ext_resource type="LabelSettings" uid="uid://x0rjm3djm1b8" path="res://scenes/themes/credits_default.tres" id="6_nptu6"]
-
-[sub_resource type="Animation" id="Animation_ga7y3"]
-resource_name = "new_animation"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CreditsPanel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.25, 1),
-"update": 0,
-"values": [Vector2(1192, 74), Vector2(416, 74)]
-}
+[ext_resource type="Texture2D" uid="uid://dqfw26ilvrn6k" path="res://graphics/main_menu/mouse_click.png" id="8_bpsdn"]
+[ext_resource type="Texture2D" uid="uid://dw3vh88iil5cw" path="res://graphics/game_main/ingredients_how_to.png" id="9_8kn1u"]
+[ext_resource type="Texture2D" uid="uid://cwaf2ttttwtf4" path="res://graphics/game_main/death_how_to.png" id="10_jvd4a"]
+[ext_resource type="Texture2D" uid="uid://d2828v3wrdm67" path="res://graphics/game_main/sinigaaaang.png" id="11_sdq15"]
 
 [sub_resource type="Animation" id="Animation_lsejr"]
 length = 0.001
@@ -35,6 +25,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1192, 74)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HowToPlayPanel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1192, 38.5)]
 }
 
 [sub_resource type="Animation" id="Animation_b8sek"]
@@ -52,18 +54,83 @@ tracks/0/keys = {
 "values": [Vector2(416, 74), Vector2(1192, 74)]
 }
 
+[sub_resource type="Animation" id="Animation_ga7y3"]
+resource_name = "new_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CreditsPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(1192, 74), Vector2(416, 74)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HowToPlayPanel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1192, 38.5), Vector2(1192, 38.5)]
+}
+
+[sub_resource type="Animation" id="Animation_4eruc"]
+resource_name = "show_how_to_play"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HowToPlayPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(1192, 38.5), Vector2(426, 38.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CreditsPanel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1192, 74), Vector2(1192, 74)]
+}
+
+[sub_resource type="Animation" id="Animation_opspw"]
+resource_name = "hide_how_to_play"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HowToPlayPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(426, 38.5), Vector2(1192, 38.5)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wongc"]
 _data = {
 "RESET": SubResource("Animation_lsejr"),
 "hide_credits": SubResource("Animation_b8sek"),
-"show_credits": SubResource("Animation_ga7y3")
+"hide_how_to_play": SubResource("Animation_opspw"),
+"show_credits": SubResource("Animation_ga7y3"),
+"show_how_to_play": SubResource("Animation_4eruc")
 }
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iqt58"]
-bg_color = Color(0.682353, 0.14902, 0.156863, 1)
-border_width_top = 10
-border_width_bottom = 10
-border_color = Color(0.913725, 0.360784, 0.141176, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ekplp"]
 font = ExtResource("4_c7in5")
@@ -238,7 +305,7 @@ offset_right = 760.0
 offset_bottom = 250.0
 grow_horizontal = 0
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_iqt58")
+theme_override_styles/panel = ExtResource("6_88tif")
 
 [node name="CreditsLabel" type="Label" parent="CreditsPanel"]
 layout_mode = 1
@@ -355,6 +422,168 @@ label_settings = ExtResource("6_nptu6")
 layout_mode = 2
 text = "Reia"
 label_settings = ExtResource("6_nptu6")
+
+[node name="HowToPlayPanel" type="Panel" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 40.0
+offset_top = -285.5
+offset_right = 740.0
+offset_bottom = 286.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("6_88tif")
+
+[node name="HowToPlayLabel" type="Label" parent="HowToPlayPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -142.0
+offset_top = 40.0
+offset_right = 142.0
+offset_bottom = 95.0
+grow_horizontal = 2
+text = "How To Play"
+label_settings = SubResource("LabelSettings_ekplp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HowToPlayPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -204.0
+offset_top = -177.5
+offset_right = 204.0
+offset_bottom = 257.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HowToPlayPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HowToPlayPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HowToPlayPanel/VBoxContainer/HBoxContainer/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(69, 69)
+layout_mode = 2
+texture = ExtResource("8_bpsdn")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label1" type="RichTextLabel" parent="HowToPlayPanel/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(145, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("4_c7in5")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[color=green]Send[/color] To Pot"
+fit_content = true
+scroll_active = false
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HowToPlayPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HowToPlayPanel/VBoxContainer/HBoxContainer/VBoxContainer2"]
+texture_filter = 1
+custom_minimum_size = Vector2(69, 69)
+layout_mode = 2
+texture = ExtResource("8_bpsdn")
+expand_mode = 3
+stretch_mode = 5
+flip_h = true
+
+[node name="Label1" type="RichTextLabel" parent="HowToPlayPanel/VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(163, 0)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("4_c7in5")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[color=violet]Punch[/color] It Away"
+fit_content = true
+scroll_active = false
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HowToPlayPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HowToPlayPanel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HowToPlayPanel/VBoxContainer/HBoxContainer2/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("9_8kn1u")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label1" type="RichTextLabel" parent="HowToPlayPanel/VBoxContainer/HBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(213, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("4_c7in5")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center][color=green]Send[/color] Ingredients to Pot[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HowToPlayPanel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HowToPlayPanel/VBoxContainer/HBoxContainer2/VBoxContainer2"]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("10_jvd4a")
+expand_mode = 3
+stretch_mode = 5
+flip_h = true
+
+[node name="Label1" type="RichTextLabel" parent="HowToPlayPanel/VBoxContainer/HBoxContainer2/VBoxContainer2"]
+custom_minimum_size = Vector2(163, 0)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("4_c7in5")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center][color=violet]Punch[/color] Bad items away[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HowToPlayPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HowToPlayPanel/VBoxContainer/VBoxContainer3"]
+self_modulate = Color(1, 0.545098, 1, 1)
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("11_sdq15")
+expand_mode = 3
+stretch_mode = 5
+flip_h = true
+
+[node name="Label1" type="RichTextLabel" parent="HowToPlayPanel/VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("4_c7in5")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center][color=violet]Do not[/color] let [color=violet]three[/color] bad items in the pot.[/center]"
+fit_content = true
+scroll_active = false
 
 [connection signal="pressed" from="MainMenuList/StartGame" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="MainMenuList/HowToPlay" to="." method="_on_how_to_play_pressed"]

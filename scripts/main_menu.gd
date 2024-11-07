@@ -36,7 +36,13 @@ func _on_start_game_pressed() -> void:
 	
 	
 func _on_how_to_play_pressed() -> void:
-	pass # Replace with function body.
+	AudioManager.sfx_play(transition_sfx.pick_random())
+	if current_scene == "how_to_play":
+		current_scene = ""
+		anim_player.play("hide_how_to_play")
+	else:
+		current_scene = "how_to_play"
+		anim_player.play("show_how_to_play")
 
 func _on_credits_pressed() -> void:
 	AudioManager.sfx_play(transition_sfx.pick_random())
