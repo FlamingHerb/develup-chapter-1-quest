@@ -29,6 +29,11 @@ var mistake_done_sfx = "res://audio/sfx/end_screen_fucked_up.mp3"
 var good_applause = "res://audio/sfx/good_applause.ogg"
 var bad_applause = "res://audio/sfx/bad_applause.ogg"
 
+var end_pathetic = "res://audio/sfx/end_pathethic.mp3"
+var end_bad = "res://audio/sfx/end_bad.ogg"
+var end_good = "res://audio/sfx/end_good.ogg"
+var end_perfect = "res://audio/sfx/end_perfect.ogg"
+
 var transition_each_line = 0.5
 
 # Arranged in order
@@ -122,16 +127,16 @@ func _set_debug_stats() -> void:
 	statistics =  {
 		"longest_combo_count": 75,
 		"ingredients_cut": 50,
-		"sinigang_drops": 1,
-		"fallen_items": 1,
-		"punched_ingredients": 1,
-		"punched_bad_items": 1,
-		"strikes": 1
+		"sinigang_drops": 0,
+		"fallen_items": 0,
+		"punched_ingredients": 0,
+		"punched_bad_items": 25,
+		"strikes": 0
 	}
 
 func _results_screen_time() -> void:
 	# TODO: Remember to remove this later!
-	_set_debug_stats()
+	#_set_debug_stats()
 	
 	# Default score is 4
 	var score = 4
@@ -161,6 +166,7 @@ func _results_screen_time() -> void:
 		score += 1
 	else:
 		AudioManager.sfx_play(mistaker_sfx)
+		score -= 1
 	
 	man_face_results.frame = score
 	results_background.texture = background_screens[score]
@@ -174,7 +180,7 @@ func _results_screen_time() -> void:
 	
 	ingredients_cut_count.text = str(statistics["ingredients_cut"])
 	ingredients_cut_count.visible = true
-	if statistics["ingredients_cut"] > 50:
+	if statistics["ingredients_cut"] >= 50:
 		AudioManager.sfx_play(woosh_sfx)
 	else:
 		AudioManager.sfx_play(mistaker_sfx)
@@ -191,7 +197,7 @@ func _results_screen_time() -> void:
 	
 	punched_bad_count.text = str(statistics["punched_bad_items"])
 	punched_bad_count.visible = true
-	if statistics["punched_bad_items"] > 25:
+	if statistics["punched_bad_items"] >= 25:
 		AudioManager.sfx_play(woosh_sfx)
 	else:
 		AudioManager.sfx_play(mistaker_sfx)
@@ -277,3 +283,17 @@ func _results_screen_time() -> void:
 	
 	await get_tree().create_timer(transition_each_line).timeout
 	
+	#========================================
+	# FINALE
+	#========================================	
+	await get_tree().create_timer(1.5).timeout
+
+	if score == 0:
+		AudioManager.sfx_play(end_pathetic)
+	elif score >= 1 and score <= 3:
+		AudioManager.sfx_play(end_bad)
+	elif score >= 1 and score <= 3:
+		AudioManager.sfx_play(end_good)
+	elif score == 9:
+		AudioManager.sfx_play(end_perfect)
+	print(score)
