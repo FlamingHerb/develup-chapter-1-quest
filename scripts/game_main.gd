@@ -10,12 +10,12 @@ enum ItemType {ITEM, ENEMY}
 @onready var animation_player = $AnimationPlayer
 @onready var combo_animation_player = $AnimationPlayer2
 @onready var god_ray = $GodRay
+@onready var the_sinigang_sprite = $SinigangPhysicsBody/TheSinigang
 
 @onready var ingredient_cut_hit = $SinigangPhysicsBody/IngredientCutHit
 @onready var ingredient_not_cut_hit = $SinigangPhysicsBody/IngredientNotCut
 @onready var sinigang_death = $SinigangPhysicsBody/SinigangDeath
 @onready var punched_layer = $PunchedObjects
-
 
 @onready var flavor_text = $UIStuff/ComboPanel/FlavorText
 @onready var combo_count_text = $UIStuff/ComboPanel/ComboLabel
@@ -188,7 +188,7 @@ func _on_sinigang_physics_body_body_entered(body: Node2D) -> void:
 		
 		ItemType.ENEMY:
 			AudioManager.sfx_play(sinigang_death_sfx.pick_random())
-			AudioManager.sfx_play(sinigang_dive_sfx.pick_random())
+			#AudioManager.sfx_play(sinigang_dive_sfx.pick_random())
 			
 			ingredient_not_cut_hit.stop()
 			sinigang_death.stop()
@@ -198,6 +198,8 @@ func _on_sinigang_physics_body_body_entered(body: Node2D) -> void:
 			ingredient_not_cut_hit.play("default")
 			sinigang_death.play("default")
 			_change_combo_count(ComboEvent.SINIDROP)
+			
+			_strike_checker()
 	
 	body.queue_free()
 
@@ -422,3 +424,35 @@ func _end_rush_time():
 	await get_tree().create_timer(5.5).timeout
 
 	AudioManager.bgm_play("res://audio/csd2_cheese_block.ogg")
+
+func _strike_checker():
+	match strikes:
+		1:
+			the_sinigang_sprite.modulate = Color(0.80, 0.75, 0.95)
+		2:
+			the_sinigang_sprite.modulate = Color(0.80, 0.5, 0.95)
+		# End game
+		3:
+			_end_game_abruptly()
+
+func _end_game_abruptly():
+	time_passes_allowed = false
+	AudioManager.bgm_stop()
+	AudioManager.sfx_stop_all()
+	
+	spawn_timer.stop()
+	
+	PhysicsServer2D.set_active(false)
+	
+	for child in projectile_group.get_children():
+		projectile_group.remove_child(child)
+		child.queue_free()
+	
+	for child in punched_layer.get_children():
+		punched_layer.remove_child(child)
+		child.queue_free()
+	
+	PhysicsServer2D.set_active(true)
+	
+	_send_statistics()
+	get_tree().change_scene_to_packed.call_deferred(preload("res://scenes/end_screen.tscn"))

@@ -96,10 +96,17 @@ func sfx_play(path: String):
 	
 	sfx.stream = load(path)
 	sfx.play()
-	
+
+func sfx_stop_all():
+	for sound in sound_effect_queue.get_children():
+		sound.stop()
+		sound_effect_queue.remove_child(sound)
+		sound.queue_free()
+
 func _sfx_free(sfx_node):
 	sfx_node.queue_free()
 #endregion
+
 
 func dizzy_changer(value: bool):
 	AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("BGS"), 0, value)
