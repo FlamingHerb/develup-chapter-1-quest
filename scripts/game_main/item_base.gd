@@ -42,14 +42,25 @@ var item_fall_sfx = [
 ]
 
 var item_cut_sfx = [
-	"res://audio/sfx/ingredient_point_1.wav",
-	"res://audio/sfx/ingredient_point_2.wav",
-	"res://audio/sfx/ingredient_point_3.wav"
+	#"res://audio/sfx/ingredient_point_1.wav"
+	#"res://audio/sfx/ingredient_point_2.wav",
+	#"res://audio/sfx/ingredient_point_3.wav",
+	#"res://audio/sfx/ingredient_point_4.wav",
+	"res://audio/sfx/ingredient_point_5.ogg",
+	"res://audio/sfx/ingredient_point_6.ogg",
+	"res://audio/sfx/ingredient_point_7.ogg"
+]
+
+var item_bad_sfx = [
+	"res://audio/sfx/bad_ingredient_1.ogg",
+	"res://audio/sfx/bad_ingredient_2.ogg"
 ]
 
 var explosion_sfx = [
 	"res://audio/sfx/explosion_1.ogg",
-	"res://audio/sfx/explosion_2.ogg"
+	"res://audio/sfx/explosion_2.ogg",
+	"res://audio/sfx/explosion_3.ogg",
+	"res://audio/sfx/explosion_4.ogg"
 ]
 
 var parry_sfx = "res://audio/sfx/parry.ogg"
@@ -94,11 +105,12 @@ func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int
 	if event is InputEventMouseButton and event.pressed:
 		
 		# Remove mask, no more scanning.
-		
-		
 		# If Left-clicked, levitate to pot.
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			AudioManager.sfx_play(item_cut_sfx.pick_random())
+			if item_type == ItemType.ITEM:
+				AudioManager.sfx_play(item_cut_sfx.pick_random())
+			else:
+				AudioManager.sfx_play(item_bad_sfx.pick_random())
 			is_ingredient_cut = true
 			actual_hitbox.shape.radius = 50
 			_change_ingredient()
