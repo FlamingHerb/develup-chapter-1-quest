@@ -365,7 +365,7 @@ position = Vector2(602, 570)
 input_pickable = false
 
 [node name="TheSinigang" type="Sprite2D" parent="SinigangPhysicsBody"]
-self_modulate = Color(0.762404, 0.762404, 0.762404, 1)
+self_modulate = Color(0.8, 0.8, 0.8, 1)
 scale = Vector2(0.512604, 0.512604)
 texture = ExtResource("4_4cejj")
 

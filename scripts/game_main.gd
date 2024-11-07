@@ -350,7 +350,6 @@ func _change_combo_count(combo_type: ComboEvent):
 	# Set style of color box again.
 	var style_box = preload("res://scenes/themes/combo_panel.tres")
 	
-		
 	# Change combo panel and text layout
 	if current_combo_count == 0:
 		combo_count_text.add_theme_color_override("font_color", default_combo_color)
@@ -363,10 +362,15 @@ func _change_combo_count(combo_type: ComboEvent):
 	elif current_combo_count > 50 and current_combo_count <= 100:
 		#combo_count_text.add_theme_color_override("font_color", up_yellow_color.lerp(up_green_color, float(current_combo_count - 50)/50))
 		style_box.set("bg_color", up_green_color.lerp(up_maroon_color, float(current_combo_count - 50)/50))
-	
-	#print(combo_count_text.get_theme_color("font_color"))
 		
 	combo_panel.add_theme_stylebox_override("panel", style_box)
+	
+	# NEW: The ability to remove a strike if you reach a 50x combo.
+	if strikes > 0:
+		if current_combo_count % 50 == 0 and current_combo_count > 0:
+			print("Strike Removed!")
+			strikes -= 1
+			_strike_checker()
 	
 	# Finally, change count.
 	combo_count_text.text = str(current_combo_count)
@@ -427,6 +431,8 @@ func _end_rush_time():
 
 func _strike_checker():
 	match strikes:
+		0:
+			the_sinigang_sprite.modulate = Color(0.80, 0.80, 0.80)
 		1:
 			the_sinigang_sprite.modulate = Color(0.80, 0.75, 0.95)
 		2:
