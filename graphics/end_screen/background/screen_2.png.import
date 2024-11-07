@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cn46wh8omdkcc"
-path="res://.godot/imported/unhappy_man4.png-c33f590fda8692ed123df1c7d235997b.ctex"
+uid="uid://ca4m5g34mhy4g"
+path="res://.godot/imported/screen_2.png-8099804125b0b59cd2cded4b820bce3d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/end_screen/unhappy_man4.png"
-dest_files=["res://.godot/imported/unhappy_man4.png-c33f590fda8692ed123df1c7d235997b.ctex"]
+source_file="res://graphics/end_screen/background/screen_2.png"
+dest_files=["res://.godot/imported/screen_2.png-8099804125b0b59cd2cded4b820bce3d.ctex"]
 
 [params]
 

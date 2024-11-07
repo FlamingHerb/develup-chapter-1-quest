@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cwarn5ihj8w3b"]
+[gd_scene load_steps=31 format=3 uid="uid://cwarn5ihj8w3b"]
 
 [ext_resource type="Script" path="res://scripts/end_screen.gd" id="1_05if7"]
 [ext_resource type="Texture2D" uid="uid://cbv1oemjsyiyq" path="res://graphics/end_screen/spotlight.png" id="2_v567w"]
@@ -6,16 +6,108 @@
 [ext_resource type="Texture2D" uid="uid://col6nnpch6qw6" path="res://graphics/end_screen/bad_damn.png" id="4_lw4rg"]
 [ext_resource type="FontFile" uid="uid://2ne5fj81qgw" path="res://fonts/pipanganan_web.ttf" id="5_m4bxi"]
 [ext_resource type="Theme" uid="uid://c7ayn0e1w6gxn" path="res://scenes/themes/defeat_button.tres" id="6_32jyk"]
-[ext_resource type="Texture2D" uid="uid://bjldjjurqqeyb" path="res://graphics/end_screen/unhappy_man4.png" id="7_u2kgt"]
+[ext_resource type="Texture2D" uid="uid://cpify5lutt1xs" path="res://graphics/end_screen/background/screen_4.png" id="7_pukus"]
+[ext_resource type="Texture2D" uid="uid://bjldjjurqqeyb" path="res://graphics/end_screen/unhappy_man5.png" id="7_u2kgt"]
 [ext_resource type="Texture2D" uid="uid://ckkvnhgbmdh8f" path="res://graphics/end_screen/unhappy_man3.png" id="8_0krh4"]
+[ext_resource type="StyleBox" uid="uid://dcuon62qhycsh" path="res://scenes/themes/main_menu_panels.tres" id="8_dcaqw"]
+[ext_resource type="LabelSettings" uid="uid://ctmv0ybh2fmip" path="res://scenes/themes/main_menu_headings.tres" id="9_8fmjt"]
 [ext_resource type="Texture2D" uid="uid://cdigjafuj3ds2" path="res://graphics/end_screen/unhappy_man2.png" id="9_u8hfc"]
-[ext_resource type="Texture2D" uid="uid://c3v2ce3mca1yl" path="res://graphics/end_screen/unhappy_man1.png" id="10_f6anr"]
+[ext_resource type="LabelSettings" uid="uid://mxg1li0f8hu1" path="res://scenes/themes/results_default.tres" id="10_pvpmt"]
 [ext_resource type="Texture2D" uid="uid://ccwtbfwy020qe" path="res://graphics/end_screen/happy_man1.png" id="11_8wry5"]
+[ext_resource type="LabelSettings" uid="uid://chkoowkpaia2p" path="res://scenes/themes/results_count_default.tres" id="11_yff0i"]
 [ext_resource type="Texture2D" uid="uid://d25m7c10e2i37" path="res://graphics/end_screen/happy_man2.png" id="12_64d5w"]
+[ext_resource type="Texture2D" uid="uid://cn46wh8omdkcc" path="res://graphics/end_screen/unhappy_man4.png" id="13_1i7yb"]
 [ext_resource type="Texture2D" uid="uid://1uedac5md0ch" path="res://graphics/end_screen/happy_man3.png" id="13_4pced"]
 [ext_resource type="Texture2D" uid="uid://dkv72gamp70sm" path="res://graphics/end_screen/happy_man4.png" id="14_knrje"]
 [ext_resource type="Texture2D" uid="uid://mvj4wgau3ajs" path="res://graphics/end_screen/happy_man5.png" id="15_xnr1a"]
 [ext_resource type="Texture2D" uid="uid://lisvd2konxda" path="res://graphics/end_screen/happy_man6.png" id="16_8tqd7"]
+
+[sub_resource type="Animation" id="Animation_jfjpd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BadEnd/Spotlight:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BadEnd/Sinigang:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BadEnd/AnimatedSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BadEnd/DayEnd:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BadEnd:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BadEnd/RetryAgain:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BadEnd/QuitToMenu:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_07bhj"]
 resource_name = "defeat"
@@ -128,93 +220,6 @@ tracks/7/keys = {
 "values": [false, true]
 }
 
-[sub_resource type="Animation" id="Animation_jfjpd"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BadEnd/Spotlight:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BadEnd/Sinigang:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("BadEnd/AnimatedSprite2D:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("BadEnd/DayEnd:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("BadEnd:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("BadEnd/RetryAgain:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("BadEnd/QuitToMenu:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pue70"]
 _data = {
 "RESET": SubResource("Animation_jfjpd"),
@@ -256,8 +261,6 @@ animations = [{
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wahyt"]
 content_margin_top = 30.0
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qrern"]
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_jvfoo"]
 animations = [{
 "frames": [{
@@ -265,13 +268,13 @@ animations = [{
 "texture": ExtResource("7_u2kgt")
 }, {
 "duration": 1.0,
+"texture": ExtResource("13_1i7yb")
+}, {
+"duration": 1.0,
 "texture": ExtResource("8_0krh4")
 }, {
 "duration": 1.0,
 "texture": ExtResource("9_u8hfc")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_f6anr")
 }, {
 "duration": 1.0,
 "texture": ExtResource("11_8wry5")
@@ -372,7 +375,7 @@ visible = false
 position = Vector2(574.75, 534)
 scale = Vector2(1.3534, 0.78125)
 sprite_frames = SubResource("SpriteFrames_6swsx")
-frame_progress = 0.922143
+frame_progress = 0.631535
 
 [node name="DayEnd" type="RichTextLabel" parent="BadEnd"]
 modulate = Color(1, 1, 1, 0)
@@ -442,20 +445,206 @@ I'm out."
 
 [node name="ResultsScreen" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="Panel" parent="ResultsScreen"]
-anchors_preset = 15
+[node name="ResultsBackground" type="TextureRect" parent="ResultsScreen"]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("7_pukus")
+
+[node name="ResultsPanel" type="Panel" parent="ResultsScreen"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.5
+offset_left = -737.0
+offset_top = -240.0
+offset_right = -104.0
+offset_bottom = 240.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("8_dcaqw")
+
+[node name="ResultsLabel" type="Label" parent="ResultsScreen/ResultsPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -148.5
+offset_top = 37.0
+offset_right = 148.5
+offset_bottom = 92.0
+grow_horizontal = 2
+text = "RESULTS"
+label_settings = ExtResource("9_8fmjt")
+
+[node name="VC" type="VBoxContainer" parent="ResultsScreen/ResultsPanel"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -227.0
+offset_top = -118.0
+offset_right = 227.0
+offset_bottom = 198.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_qrern")
+
+[node name="HC" type="HBoxContainer" parent="ResultsScreen/ResultsPanel/VC"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+
+[node name="LongCombo" type="Label" parent="ResultsScreen/ResultsPanel/VC/HC"]
+visible = false
+custom_minimum_size = Vector2(350, 30)
+layout_mode = 2
+size_flags_vertical = 5
+text = "Longest Combo"
+label_settings = ExtResource("10_pvpmt")
+vertical_alignment = 1
+
+[node name="LongComboCount" type="Label" parent="ResultsScreen/ResultsPanel/VC/HC"]
+visible = false
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+text = "2"
+label_settings = ExtResource("11_yff0i")
+horizontal_alignment = 1
+
+[node name="HC2" type="HBoxContainer" parent="ResultsScreen/ResultsPanel/VC"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+
+[node name="IngreCut" type="Label" parent="ResultsScreen/ResultsPanel/VC/HC2"]
+visible = false
+custom_minimum_size = Vector2(350, 30)
+layout_mode = 2
+size_flags_vertical = 5
+text = "Ingredients Cut"
+label_settings = ExtResource("10_pvpmt")
+vertical_alignment = 1
+
+[node name="IngreCutCount" type="Label" parent="ResultsScreen/ResultsPanel/VC/HC2"]
+visible = false
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+text = "2"
+label_settings = ExtResource("11_yff0i")
+horizontal_alignment = 1
+
+[node name="HC3" type="HBoxContainer" parent="ResultsScreen/ResultsPanel/VC"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+
+[node name="PunchedBad" type="Label" parent="ResultsScreen/ResultsPanel/VC/HC3"]
+visible = false
+custom_minimum_size = Vector2(350, 30)
+layout_mode = 2
+size_flags_vertical = 5
+text = "Punched Bad Items"
+label_settings = ExtResource("10_pvpmt")
+vertical_alignment = 1
+
+[node name="PunchedBadCount" type="Label" parent="ResultsScreen/ResultsPanel/VC/HC3"]
+visible = false
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+text = "2"
+label_settings = ExtResource("11_yff0i")
+horizontal_alignment = 1
+
+[node name="HC4" type="HBoxContainer" parent="ResultsScreen/ResultsPanel/VC"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+
+[node name="SinigangDrop" type="Label" parent="ResultsScreen/ResultsPanel/VC/HC4"]
+visible = false
+custom_minimum_size = Vector2(350, 30)
+layout_mode = 2
+size_flags_vertical = 5
+text = "Uncut Items"
+label_settings = ExtResource("10_pvpmt")
+vertical_alignment = 1
+
+[node name="SinigangDropCount" type="Label" parent="ResultsScreen/ResultsPanel/VC/HC4"]
+visible = false
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+text = "2"
+label_settings = ExtResource("11_yff0i")
+horizontal_alignment = 1
+
+[node name="HC5" type="HBoxContainer" parent="ResultsScreen/ResultsPanel/VC"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+
+[node name="FallenItems" type="Label" parent="ResultsScreen/ResultsPanel/VC/HC5"]
+visible = false
+custom_minimum_size = Vector2(350, 30)
+layout_mode = 2
+size_flags_vertical = 5
+text = "Fallen (BY) Items"
+label_settings = ExtResource("10_pvpmt")
+vertical_alignment = 1
+
+[node name="FallenItemsCount" type="Label" parent="ResultsScreen/ResultsPanel/VC/HC5"]
+visible = false
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+text = "2"
+label_settings = ExtResource("11_yff0i")
+horizontal_alignment = 1
+
+[node name="HC6" type="HBoxContainer" parent="ResultsScreen/ResultsPanel/VC"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+
+[node name="PunchedIngre" type="Label" parent="ResultsScreen/ResultsPanel/VC/HC6"]
+visible = false
+custom_minimum_size = Vector2(350, 30)
+layout_mode = 2
+size_flags_vertical = 5
+text = "Punched Ingredients"
+label_settings = ExtResource("10_pvpmt")
+vertical_alignment = 1
+
+[node name="PunchedIngreCount" type="Label" parent="ResultsScreen/ResultsPanel/VC/HC6"]
+visible = false
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+text = "2"
+label_settings = ExtResource("11_yff0i")
+horizontal_alignment = 1
+
+[node name="HC7" type="HBoxContainer" parent="ResultsScreen/ResultsPanel/VC"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+
+[node name="Strikes" type="Label" parent="ResultsScreen/ResultsPanel/VC/HC7"]
+visible = false
+custom_minimum_size = Vector2(350, 30)
+layout_mode = 2
+size_flags_vertical = 5
+text = "Strikes"
+label_settings = ExtResource("10_pvpmt")
+vertical_alignment = 1
+
+[node name="StrikesCount" type="Label" parent="ResultsScreen/ResultsPanel/VC/HC7"]
+visible = false
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+text = "2"
+label_settings = ExtResource("11_yff0i")
+horizontal_alignment = 1
 
 [node name="ManFace" type="AnimatedSprite2D" parent="ResultsScreen"]
-position = Vector2(256, 377)
+position = Vector2(216, 377)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_jvfoo")
 animation = &"scoring"
-frame = 3
+frame = 4
 
 [connection signal="pressed" from="BadEnd/RetryAgain" to="." method="_on_retry_again_pressed"]
 [connection signal="pressed" from="BadEnd/QuitToMenu" to="." method="_on_quit_to_menu_pressed"]

@@ -1,0 +1,11 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://ctmv0ybh2fmip"]
+
+[ext_resource type="FontFile" uid="uid://2ne5fj81qgw" path="res://fonts/pipanganan_web.ttf" id="1_s5iqa"]
+
+[resource]
+font = ExtResource("1_s5iqa")
+font_size = 64
+font_color = Color(0.882353, 0.560784, 0.129412, 1)
+shadow_size = 8
+shadow_color = Color(0.65098, 0.117647, 0.129412, 1)
+shadow_offset = Vector2(1, 6)
