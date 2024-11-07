@@ -3,7 +3,6 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
 	# Only occurs if the game ends abruptly.
 	if TransitionLayer.in_transition:
 		TransitionLayer.remove_transition()
