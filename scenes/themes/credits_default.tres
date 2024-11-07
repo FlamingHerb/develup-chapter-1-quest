@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://x0rjm3djm1b8"]
+
+[ext_resource type="FontFile" uid="uid://2ne5fj81qgw" path="res://fonts/pipanganan_web.ttf" id="1_406ma"]
+
+[resource]
+font = ExtResource("1_406ma")
+font_size = 20
