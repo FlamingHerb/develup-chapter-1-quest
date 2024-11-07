@@ -405,7 +405,7 @@ label_settings = ExtResource("6_nptu6")
 
 [node name="SFX3" type="Label" parent="CreditsPanel/GridContainer/VBoxContainer"]
 layout_mode = 2
-text = "SFX"
+text = "Pixabay"
 label_settings = ExtResource("6_nptu6")
 
 [node name="SFX4" type="Label" parent="CreditsPanel/GridContainer/VBoxContainer"]

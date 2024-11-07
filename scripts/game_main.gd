@@ -168,7 +168,6 @@ func _on_ingredient_death_zone_body_entered(body: Node2D) -> void:
 ## If an ingredient falls into the sinigang.
 ## body is item_base.gd
 func _on_sinigang_physics_body_body_entered(body: Node2D) -> void:
-	print(body.item_type)
 	match body.item_type:
 		ItemType.ITEM:
 			if body.is_ingredient_cut:
@@ -450,15 +449,19 @@ func _end_game_abruptly():
 	
 	PhysicsServer2D.set_active(false)
 	
-	for child in projectile_group.get_children():
-		projectile_group.remove_child(child)
-		child.queue_free()
+	if projectile_group.get_child_count() > 0:
+		for child in projectile_group.get_children():
+			projectile_group.remove_child(child)
+			child.queue_free()
 	
-	for child in punched_layer.get_children():
-		punched_layer.remove_child(child)
-		child.queue_free()
-	
+	if punched_layer.get_child_count() > 0:
+		for child in punched_layer.get_children():
+			punched_layer.remove_child(child)
+			child.queue_free()
+		
 	PhysicsServer2D.set_active(true)
 	
 	_send_statistics()
+	
+	AudioManager.sfx_play("res://audio/sfx/thunder_clap.ogg")
 	get_tree().change_scene_to_packed.call_deferred(preload("res://scenes/end_screen.tscn"))

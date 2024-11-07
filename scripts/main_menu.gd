@@ -20,6 +20,14 @@ var transition_sfx = [
 
 func _ready() -> void:
 	AudioManager.bgm_play("res://audio/csd2_mainmenu_c.ogg")
+	
+	# Only occurs if the game ends abruptly.
+	if TransitionLayer.in_transition:
+		TransitionLayer.remove_transition()
+		await TransitionLayer.transition_finished
+	else:
+		pass
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
