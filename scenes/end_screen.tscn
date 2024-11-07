@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cwarn5ihj8w3b"]
+[gd_scene load_steps=27 format=3 uid="uid://cwarn5ihj8w3b"]
 
 [ext_resource type="Script" path="res://scripts/end_screen.gd" id="1_05if7"]
 [ext_resource type="Texture2D" uid="uid://cbv1oemjsyiyq" path="res://graphics/end_screen/spotlight.png" id="2_v567w"]
@@ -6,6 +6,16 @@
 [ext_resource type="Texture2D" uid="uid://col6nnpch6qw6" path="res://graphics/end_screen/bad_damn.png" id="4_lw4rg"]
 [ext_resource type="FontFile" uid="uid://2ne5fj81qgw" path="res://fonts/pipanganan_web.ttf" id="5_m4bxi"]
 [ext_resource type="Theme" uid="uid://c7ayn0e1w6gxn" path="res://scenes/themes/defeat_button.tres" id="6_32jyk"]
+[ext_resource type="Texture2D" uid="uid://bjldjjurqqeyb" path="res://graphics/end_screen/unhappy_man4.png" id="7_u2kgt"]
+[ext_resource type="Texture2D" uid="uid://ckkvnhgbmdh8f" path="res://graphics/end_screen/unhappy_man3.png" id="8_0krh4"]
+[ext_resource type="Texture2D" uid="uid://cdigjafuj3ds2" path="res://graphics/end_screen/unhappy_man2.png" id="9_u8hfc"]
+[ext_resource type="Texture2D" uid="uid://c3v2ce3mca1yl" path="res://graphics/end_screen/unhappy_man1.png" id="10_f6anr"]
+[ext_resource type="Texture2D" uid="uid://ccwtbfwy020qe" path="res://graphics/end_screen/happy_man1.png" id="11_8wry5"]
+[ext_resource type="Texture2D" uid="uid://d25m7c10e2i37" path="res://graphics/end_screen/happy_man2.png" id="12_64d5w"]
+[ext_resource type="Texture2D" uid="uid://1uedac5md0ch" path="res://graphics/end_screen/happy_man3.png" id="13_4pced"]
+[ext_resource type="Texture2D" uid="uid://dkv72gamp70sm" path="res://graphics/end_screen/happy_man4.png" id="14_knrje"]
+[ext_resource type="Texture2D" uid="uid://mvj4wgau3ajs" path="res://graphics/end_screen/happy_man5.png" id="15_xnr1a"]
+[ext_resource type="Texture2D" uid="uid://lisvd2konxda" path="res://graphics/end_screen/happy_man6.png" id="16_8tqd7"]
 
 [sub_resource type="Animation" id="Animation_07bhj"]
 resource_name = "defeat"
@@ -246,6 +256,57 @@ animations = [{
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wahyt"]
 content_margin_top = 30.0
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qrern"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jvfoo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_u2kgt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_0krh4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_u8hfc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_f6anr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_8wry5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_64d5w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_4pced")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_knrje")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_xnr1a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_8tqd7")
+}],
+"loop": false,
+"name": &"scoring",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_xnr1a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_8tqd7")
+}],
+"loop": false,
+"name": &"we_won",
+"speed": 5.0
+}]
+
 [node name="EndScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -311,7 +372,7 @@ visible = false
 position = Vector2(574.75, 534)
 scale = Vector2(1.3534, 0.78125)
 sprite_frames = SubResource("SpriteFrames_6swsx")
-frame_progress = 0.506
+frame_progress = 0.922143
 
 [node name="DayEnd" type="RichTextLabel" parent="BadEnd"]
 modulate = Color(1, 1, 1, 0)
@@ -378,6 +439,23 @@ theme_override_colors/font_focus_color = Color(0.788235, 0.145098, 0.141176, 1)
 theme_override_colors/font_color = Color(0.482353, 0.0666667, 0.0666667, 1)
 text = "Fuck this,
 I'm out."
+
+[node name="ResultsScreen" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="Panel" parent="ResultsScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_qrern")
+
+[node name="ManFace" type="AnimatedSprite2D" parent="ResultsScreen"]
+position = Vector2(256, 377)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_jvfoo")
+animation = &"scoring"
+frame = 3
 
 [connection signal="pressed" from="BadEnd/RetryAgain" to="." method="_on_retry_again_pressed"]
 [connection signal="pressed" from="BadEnd/QuitToMenu" to="." method="_on_quit_to_menu_pressed"]

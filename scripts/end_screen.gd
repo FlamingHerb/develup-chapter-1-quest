@@ -17,6 +17,13 @@ var defeat_sfx = [
 
 @onready var anim_player = $AnimationPlayer
 
+# Results screen does not use animation, so....
+@onready var results_screen_canvas = $ResultsScreen
+@onready var man_face_results = $ResultsScreen/ManFace
+
+@onready var drum_roll_sfx = "res://audio/sfx/drum_roll.wav"
+@onready var mistake_done_sfx = "res://audio/sfx/end_screen_fucked_up.mp3"
+
 #===============================================================================
 # Engine Signature/Signals functions
 #===============================================================================
@@ -24,6 +31,12 @@ var defeat_sfx = [
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:	
 	statistics = Events.get_statistics()
+	results_screen_canvas.visible = false
+	
+	if statistics["strikes"] == 3:
+		anim_player.play("defeat")
+	else:
+		_results_screen_time()
 	
 	# Only occurs if the game ends abruptly.
 	if TransitionLayer.in_transition:
@@ -32,15 +45,8 @@ func _ready() -> void:
 	else:
 		pass
 	
-	if statistics["strikes"] == 3:
-		anim_player.play("defeat")
-	else:
-		pass
-	
-	
 	# TODO: REMEMBER, THIS IS DEBUG ONLY
 	# anim_player.play("defeat")
-	
 
 #===============================================================================
 # Custom functions
@@ -73,3 +79,12 @@ func _quit_to_menu() -> void:
 	await TransitionLayer.transition_finished
 	
 	get_tree().change_scene_to_file.call_deferred("res://scenes/main_menu.tscn")
+
+func _results_screen_time() -> void:
+	# Wait for transition to end first.
+	await get_tree().create_timer(0.5).timeout
+	
+	results_screen_canvas.visible = true
+	
+	# Setting up man face
+	man_face_results.frame = 3
