@@ -10,6 +10,8 @@ var player_statistics = {
 	"strikes": 0
 }
 
+var hit_stop_duration: float = 0.25
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.

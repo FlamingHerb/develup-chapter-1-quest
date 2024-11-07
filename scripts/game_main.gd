@@ -13,6 +13,8 @@ enum ItemType {ITEM, ENEMY}
 @onready var ingredient_cut_hit = $SinigangPhysicsBody/IngredientCutHit
 @onready var ingredient_not_cut_hit = $SinigangPhysicsBody/IngredientNotCut
 @onready var sinigang_death = $SinigangPhysicsBody/SinigangDeath
+@onready var punched_layer = $PunchedObjects
+
 
 @onready var flavor_text = $UIStuff/ComboPanel/FlavorText
 @onready var combo_count_text = $UIStuff/ComboPanel/ComboLabel
@@ -23,11 +25,18 @@ enum ItemType {ITEM, ENEMY}
 @onready var rush_time_timer = $RushTimeCounter
 @onready var rush_time_duration_timer = $RushTimeDuration
 
+@export_category("Game Variables")
 @export_range(6, 24) var game_time: float = 6
 @export_range(1, 200) var game_speed: int = 20
 @export var time_passes_allowed: bool = true
 @export_range(6, 24) var rush_time_start: float = true
 @export_range(6, 24) var rush_time_end: float = true
+
+@export_category("Spawn Timer Variables")
+@export_range(0.1, 1) var spawn_time_min: float = true
+@export_range(0.1, 1) var spawn_time_max: float = true
+@export_range(0.1, 1) var rush_spawn_time_min: float = true
+@export_range(0.1, 1) var rush_spawn_time_max: float = true
 
 const min_per_hour = 60
 const game_to_irl_min = (2 * PI) / 1440
@@ -196,10 +205,10 @@ func _on_timer_timeout() -> void:
 	
 	# If rush time
 	if rush_time == true and finish_rush_time == false:
-		spawn_timer.wait_time = randf_range(0.5, 0.75)
+		spawn_timer.wait_time = randf_range(rush_spawn_time_min, rush_spawn_time_max)
 	# Else normal
 	else:
-		spawn_timer.wait_time = randf_range(0.75, 1.25)
+		spawn_timer.wait_time = randf_range(spawn_time_min, spawn_time_max)
 
 func _on_start_of_game_timer_timeout() -> void:
 	# Game can now start, time resumes.
@@ -250,15 +259,19 @@ func _new_item_spawn():
 	
 	# Play SFX
 	
-func _item_got_punched(item_type: ItemType):
+# punched_layer -> layer for punching
+# projectile_group -> layer for projectiles
+func _item_got_punched(item_type: ItemType, body_reference: Node2D):
 	print("Item punched is... ", item_type)
+	
+	# Setting it to the other layer. 
+	body_reference.reparent(punched_layer)
 	
 	# Stop everything for this moment.
 	PhysicsServer2D.set_active(false)
 	time_passes_allowed = false
 	modulate = Color(1.4, 1.4, 1.4)
 	AudioManager.bgm_pause(true)
-	
 	
 	match item_type:
 		ItemType.ITEM:
@@ -269,7 +282,7 @@ func _item_got_punched(item_type: ItemType):
 			_change_combo_count(ComboEvent.PUNCHED_BAD_ITEM)
 			punched_bad_items += 1
 	
-	await get_tree().create_timer(0.4).timeout
+	await get_tree().create_timer(Events.hit_stop_duration).timeout
 	
 	PhysicsServer2D.set_active(true)
 	time_passes_allowed = true

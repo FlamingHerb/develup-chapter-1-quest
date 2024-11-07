@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/csd2_hot_butter_biscuits_lunch_time.ogg-eeea3
 
 [params]
 
-loop=false
-loop_offset=0
-bpm=0
+loop=true
+loop_offset=24.109
+bpm=0.0
 beat_count=0
 bar_beats=4
