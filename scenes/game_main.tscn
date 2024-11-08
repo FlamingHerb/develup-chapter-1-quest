@@ -439,9 +439,9 @@ theme_override_styles/panel = ExtResource("12_ir30y")
 
 [node name="FlavorText" type="Label" parent="UIStuff/ComboPanel"]
 layout_mode = 0
-offset_left = 118.0
+offset_left = 126.0
 offset_top = 7.0
-offset_right = 277.0
+offset_right = 285.0
 offset_bottom = 66.0
 text = "COMBOS"
 label_settings = SubResource("LabelSettings_nyyn1")
