@@ -64,6 +64,28 @@ const default_combo_color = Color8(168, 168, 168, 255)
 const god_ray_color = Color8(207, 162, 0, 106)
 const god_ray_color_final = Color8(207, 162, 0, 0)
 
+var common_themes = [
+	"res://audio/csd2_aprons_on.ogg",
+	"res://audio/csd2_diner_murder_mystery.ogg",
+	"res://audio/csd2_cheese_block.ogg",
+	"res://audio/csd2_churn_and_burn.ogg",
+	"res://audio/csd2_eight_bits_of_delicious.ogg"
+]
+
+var rush_hour_theme_picked: int = 0
+
+var rush_hour_themes = [
+	"res://audio/csd2_rush_hbbl.ogg",
+	"res://audio/csd2_rush_hour_bp.ogg",
+	"res://audio/csd2_rush_hour_chim.ogg"
+]
+
+var rush_hour_theme_end = [
+	"res://audio/csd2_rush_hbbl_end.ogg",
+	"res://audio/csd2_rush_hour_bp_end.ogg",
+	"res://audio/csd2_rush_hour_chim_end.ogg"
+]
+
 var item_throw_sfx = [
 	"res://audio/sfx/item_throw_1.mp3",
 	"res://audio/sfx/item_throw_2.mp3",
@@ -222,7 +244,7 @@ func _on_start_of_game_timer_timeout() -> void:
 	
 	# Play BGM woooh.
 	
-	AudioManager.bgm_play("res://audio/csd2_diner_murder_mystery.ogg")
+	AudioManager.bgm_play(common_themes.pick_random())
 	
 	spawn_timer.start()
 
@@ -414,7 +436,8 @@ func _send_statistics():
 	Events.set_statistics(new_dictionary)
 	
 func _start_rush_time():
-	AudioManager.bgm_play("res://audio/csd2_hot_butter_biscuits_lunch_time.ogg")
+	rush_hour_theme_picked = randi_range(0, 2)
+	AudioManager.bgm_play(rush_hour_themes[rush_hour_theme_picked])
 	animation_player.play("lunch_time")
 	await animation_player.animation_finished
 	#rush_time_duration_timer.start()
@@ -422,12 +445,12 @@ func _start_rush_time():
 	
 func _end_rush_time():
 	AudioManager.bgm_stop()
-	AudioManager.sfx_play("res://audio/csd2_rush_time_fanfare.ogg")
+	AudioManager.sfx_play(rush_hour_theme_end[rush_hour_theme_picked])
 	animation_player.play("lunch_time_end")
 	
 	await get_tree().create_timer(5.5).timeout
 
-	AudioManager.bgm_play("res://audio/csd2_cheese_block.ogg")
+	AudioManager.bgm_play(common_themes.pick_random())
 
 func _strike_checker():
 	match strikes:
