@@ -1,0 +1,24 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://dqnsd7x5l0gkk"]
+
+[ext_resource type="FontFile" uid="uid://2ne5fj81qgw" path="res://fonts/pipanganan_web.ttf" id="1_yy13c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gyhgp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b7bnv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fvdob"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1juib"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_13bi8"]
+
+[resource]
+default_font = ExtResource("1_yy13c")
+default_font_size = 48
+Button/colors/font_outline_color = Color(0.952941, 0.666667, 0.172549, 1)
+Button/constants/outline_size = 8
+Button/styles/disabled = SubResource("StyleBoxEmpty_gyhgp")
+Button/styles/focus = SubResource("StyleBoxEmpty_b7bnv")
+Button/styles/hover = SubResource("StyleBoxEmpty_fvdob")
+Button/styles/normal = SubResource("StyleBoxEmpty_1juib")
+Button/styles/pressed = SubResource("StyleBoxEmpty_13bi8")

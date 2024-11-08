@@ -66,6 +66,13 @@ var background_screens = [
 @onready var strikeds					= $ResultsScreen/ResultsPanel/VC/HC7/Strikes
 @onready var strikeds_count				= $ResultsScreen/ResultsPanel/VC/HC7/StrikesCount
 
+@onready var results_tab	= $ResultsScreen/ResultsPanel/VC
+@onready var result_buttons	= $ResultsScreen/ResultsPanel/ResultsButtons
+
+@onready var perfect_text 	= $ResultsScreen/ResultsPanel/Perfect
+@onready var good_text 		= $ResultsScreen/ResultsPanel/GoodWork
+@onready var bad_text 		= $ResultsScreen/ResultsPanel/BadWork
+@onready var bruh_text 		= $ResultsScreen/ResultsPanel/ComeOnDude
 
 #===============================================================================
 # Engine Signature/Signals functions
@@ -283,17 +290,31 @@ func _results_screen_time() -> void:
 	
 	await get_tree().create_timer(transition_each_line).timeout
 	
+	
 	#========================================
 	# FINALE
 	#========================================	
 	await get_tree().create_timer(1.5).timeout
-
+	results_tab.visible = false
+	AudioManager.sfx_stop_all()
+	AudioManager.sfx_play(drum_roll_sfx)
+	
+	await get_tree().create_timer(3).timeout
+	AudioManager.sfx_stop_all()
+	
 	if score == 0:
+		bruh_text.visible = true
 		AudioManager.sfx_play(end_pathetic)
 	elif score >= 1 and score <= 3:
+		bad_text.visible = true
 		AudioManager.sfx_play(end_bad)
-	elif score >= 1 and score <= 3:
+	elif score >= 4 and score <= 8:
+		good_text.visible = true
 		AudioManager.sfx_play(end_good)
 	elif score == 9:
+		perfect_text.visible = true
 		AudioManager.sfx_play(end_perfect)
-	print(score)
+	
+	await get_tree().create_timer(6).timeout
+	_play_spotlight_sfx()
+	result_buttons.visible = true
