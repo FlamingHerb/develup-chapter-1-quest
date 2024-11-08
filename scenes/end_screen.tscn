@@ -423,7 +423,7 @@ theme_override_colors/font_pressed_color = Color(0.0117647, 0.454902, 0.235294, 
 theme_override_colors/font_focus_color = Color(0.0117647, 0.454902, 0.235294, 1)
 theme_override_colors/font_color = Color(0.00392157, 0.266667, 0.129412, 1)
 text = "NAH,
-I'D WIN."
+ID WIN."
 
 [node name="QuitToMenu" type="Button" parent="BadEnd"]
 visible = false
@@ -445,7 +445,7 @@ theme_override_colors/font_pressed_color = Color(0.788235, 0.145098, 0.141176, 1
 theme_override_colors/font_focus_color = Color(0.788235, 0.145098, 0.141176, 1)
 theme_override_colors/font_color = Color(0.482353, 0.0666667, 0.0666667, 1)
 text = "Fuck this,
-I'm out."
+Im out."
 
 [node name="ResultsScreen" type="CanvasLayer" parent="."]
 
