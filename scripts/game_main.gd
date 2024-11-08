@@ -27,17 +27,17 @@ enum ItemType {ITEM, ENEMY}
 @onready var rush_time_duration_timer = $RushTimeDuration
 
 @export_category("Game Variables")
-@export_range(6, 24) var game_time: float = 6
-@export_range(1, 200) var game_speed: int = 20
-@export var time_passes_allowed: bool = true
-@export_range(6, 24) var rush_time_start: float = true
-@export_range(6, 24) var rush_time_end: float = true
+@export_range(6, 24) var game_time: float = 7
+@export_range(1, 200) var game_speed: int = 10
+@export var time_passes_allowed: bool = false
+@export_range(6, 24) var rush_time_start: float = 11
+@export_range(6, 24) var rush_time_end: float = 14.5
 
 @export_category("Spawn Timer Variables")
-@export_range(0.1, 1) var spawn_time_min: float = true
-@export_range(0.1, 1) var spawn_time_max: float = true
-@export_range(0.1, 1) var rush_spawn_time_min: float = true
-@export_range(0.1, 1) var rush_spawn_time_max: float = true
+@export_range(0.1, 1) var spawn_time_min: float = 0.75
+@export_range(0.1, 1) var spawn_time_max: float = 1
+@export_range(0.1, 1) var rush_spawn_time_min: float = 0.4
+@export_range(0.1, 1) var rush_spawn_time_max: float = 0.69
 
 const min_per_hour = 60
 const game_to_irl_min = (2 * PI) / 1440
