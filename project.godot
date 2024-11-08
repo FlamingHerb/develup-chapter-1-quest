@@ -14,7 +14,9 @@ config/name="Chapter 1 Quest"
 config/tags=PackedStringArray("my_work")
 run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/show_image=false
+config/icon="res://sinigang_icon.png"
+config/windows_native_icon="res://sinigang_icon.ico"
 
 [autoload]
 
@@ -39,7 +41,6 @@ pause_game={
 [physics]
 
 2d/run_on_separate_thread=true
-common/physics_interpolation=true
 
 [rendering]
 
