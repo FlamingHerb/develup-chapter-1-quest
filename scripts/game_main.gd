@@ -99,6 +99,7 @@ var sinigang_death_sfx = [
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Events.set_reset_stats()
 	# We assume that we come from a transition.
 	TransitionLayer.remove_transition()
 	

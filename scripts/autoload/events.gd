@@ -25,4 +25,9 @@ func get_statistics() -> Dictionary:
 
 func set_statistics(data: Dictionary) -> void:
 	player_statistics = data
+	#print(player_statistics)
+
+func set_reset_stats() -> void:
+	for key in player_statistics.keys():
+		player_statistics[key] = 0
 	print(player_statistics)
