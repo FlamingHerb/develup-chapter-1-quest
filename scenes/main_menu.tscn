@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://dmdqtndi6rkpv"]
 
 [ext_resource type="Texture2D" uid="uid://byal6h856ynn0" path="res://graphics/titlescreen.png" id="1_8yg3x"]
-[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_pqmpq"]
+[ext_resource type="Script" uid="uid://cmoorqarsw2sk" path="res://scripts/main_menu.gd" id="1_pqmpq"]
 [ext_resource type="PackedScene" uid="uid://b8ww0a1pvgtar" path="res://scenes/game_main.tscn" id="2_tokvt"]
 [ext_resource type="FontFile" uid="uid://2ne5fj81qgw" path="res://fonts/pipanganan_web.ttf" id="4_c7in5"]
 [ext_resource type="PackedScene" uid="uid://68su2xs0crgu" path="res://scenes/main_menu_comp/button.tscn" id="5_0ggim"]
@@ -126,11 +126,11 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wongc"]
 _data = {
-"RESET": SubResource("Animation_lsejr"),
-"hide_credits": SubResource("Animation_b8sek"),
-"hide_how_to_play": SubResource("Animation_opspw"),
-"show_credits": SubResource("Animation_ga7y3"),
-"show_how_to_play": SubResource("Animation_4eruc")
+&"RESET": SubResource("Animation_lsejr"),
+&"hide_credits": SubResource("Animation_b8sek"),
+&"hide_how_to_play": SubResource("Animation_opspw"),
+&"show_credits": SubResource("Animation_ga7y3"),
+&"show_how_to_play": SubResource("Animation_4eruc")
 }
 
 [node name="MainMenu" type="Node"]
@@ -139,7 +139,7 @@ game_scene = ExtResource("2_tokvt")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_wongc")
+&"": SubResource("AnimationLibrary_wongc")
 }
 
 [node name="TitleScreen" type="TextureRect" parent="."]

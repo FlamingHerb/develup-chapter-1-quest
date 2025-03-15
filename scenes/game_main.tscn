@@ -1,9 +1,9 @@
 [gd_scene load_steps=65 format=3 uid="uid://b8ww0a1pvgtar"]
 
-[ext_resource type="Script" path="res://scripts/game_main.gd" id="1_3ull0"]
+[ext_resource type="Script" uid="uid://bqr72okl75unb" path="res://scripts/game_main.gd" id="1_3ull0"]
 [ext_resource type="Texture2D" uid="uid://dtwqh87n4gtbd" path="res://graphics/game_main/background.png" id="2_uem3c"]
-[ext_resource type="Script" path="res://scripts/game_main/camera_2d.gd" id="3_ftt30"]
-[ext_resource type="Shader" path="res://scripts/game_main/godray.gdshader" id="3_ro3qx"]
+[ext_resource type="Script" uid="uid://dv5fb8m2pbfkd" path="res://scripts/game_main/camera_2d.gd" id="3_ftt30"]
+[ext_resource type="Shader" uid="uid://c6idep07i0qdt" path="res://scripts/game_main/godray.gdshader" id="3_ro3qx"]
 [ext_resource type="Texture2D" uid="uid://d2828v3wrdm67" path="res://graphics/game_main/sinigaaaang.png" id="4_4cejj"]
 [ext_resource type="Texture2D" uid="uid://bfsoyhgf0nemq" path="res://graphics/game_main/counter_top.png" id="4_a3qep"]
 [ext_resource type="Texture2D" uid="uid://d01n4yb18q3yq" path="res://icon.svg" id="4_sjphd"]
@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bt73551ww7a1l" path="res://graphics/game_main/animations/ingredient_not_cut_hit.png" id="6_6edan"]
 [ext_resource type="Texture2D" uid="uid://b2rjjo3aimcuv" path="res://graphics/game_main/animations/cloud_transform.png" id="7_v6cpr"]
 [ext_resource type="Texture2D" uid="uid://bbsbckhn4budd" path="res://graphics/game_main/animations/welp_that_happened.png" id="8_mgwa3"]
-[ext_resource type="Script" path="res://scripts/screen_tint.gd" id="10_6w0uc"]
+[ext_resource type="Script" uid="uid://dgrbtgl4ymp7v" path="res://scripts/screen_tint.gd" id="10_6w0uc"]
 [ext_resource type="Texture2D" uid="uid://stoy8dp481gx" path="res://scripts/daynightcycle-gradient-texture.tres" id="11_5bvha"]
 [ext_resource type="StyleBox" uid="uid://c41n44aj7nu4l" path="res://scenes/themes/combo_panel.tres" id="12_ir30y"]
 [ext_resource type="FontFile" uid="uid://2ne5fj81qgw" path="res://fonts/pipanganan_web.ttf" id="13_0thuj"]
@@ -612,12 +612,12 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": ExtResource("18_r0g4p")
+&"": ExtResource("18_r0g4p")
 }
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 libraries = {
-"weeee": ExtResource("18_r0g4p")
+&"weeee": ExtResource("18_r0g4p")
 }
 
 [node name="Parallax2D" type="Parallax2D" parent="."]

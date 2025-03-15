@@ -322,14 +322,14 @@ func _change_time_label(current_time: float):
 	var minutes: float = floor((current_time - hour) * 60)
 	
 	if hour < 10:
-		text_hour = "0" + str(hour)
+		text_hour = "0" + str(int(hour))
 	else:
-		text_hour = str(hour)
+		text_hour = str(int(hour))
 	
 	if minutes < 10:
-		text_min = "0" + str(minutes)
+		text_min = "0" + str(int(minutes))
 	else:
-		text_min = str(minutes)
+		text_min = str(int(minutes))
 	
 	current_time_label.text = text_hour + ":" + text_min
 
